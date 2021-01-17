@@ -1,17 +1,26 @@
-\section{OpenCV}
+\section{Nummernschild auslesen}
 
-\begin{frame}{OpenCV}
-    Was ist OpenCV?
-   \begin{itemize}
-   \item OpenCV ist eine plattformübergreifende Bibliothek, für Echtzeit-Computer-Vision-Anwendungen
-   \item beinhaltet Algorithmen für die Bildverarbeitung und im Rahmen von Computer Vision (CV) auch für maschinelles Lernen
-    \end{itemize}
-    
-   Wofür nutzen wir OpenCV?
-   \begin{itemize}
-   \item Nutzung für die Verarbeitung des erkannten Nummernschildes (z.B. Tresholding), um die Zeichen besser zu erkennen und richtig auszulesen
-   
-   \end{itemize}
+\begin{frame}{Nummernschild auslesen}
+
+Wie können wir Text auf Bildern auslesen?
+
+\begin{itemize}
+\item Tesseract: freie Software zur Texterkennung mit vielen vorimplementierten Sprachen
+\item Problem: Text wird größtenteils noch nicht richtig auf den unbearbeiteten Nummernschildern erkannt
+\item Lösung: das erkannte Nummernschild derart vorverarbeiten (preprocessing), dass das richtige Auslesen der einzelnen Elemente möglichst gut unterstützt wird
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{Nummernschild vorverarbeiten}
+
+\begin{itemize}
+\item Geeignetes Werkzeug: OpenCV
+\item OpenCV ist eine plattformübergreifende Bibliothek, für Echtzeit-Computer-Vision-Anwendungen
+\item beinhaltet Algorithmen für die Bildverarbeitung und im Rahmen von Computer Vision (CV) auch für maschinelles Lernen
+\item Nutzung für die Verarbeitung des erkannten Nummernschildes (z.B. Tresholding), um die Zeichen besser zu erkennen und richtig auszulesen
+\end{itemize}
+
 \end{frame}
 
 \begin{frame}{Beispiel für die Anwendung von OpenCV}
