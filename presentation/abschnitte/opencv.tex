@@ -5,7 +5,7 @@
 Wie können wir Text auf Bildern auslesen?
 
 \begin{itemize}
-\item Tesseract: freie Software zur Texterkennung mit vielen vorimplementierten Sprachen
+\item Tesseract: freie Software zur Texterkennung mit vielen vorimplementierten Sprachen \cite{smith_2007}
 \item Problem: Text wird größtenteils noch nicht richtig auf den unbearbeiteten Nummernschildern erkannt
 \item Lösung: das erkannte Nummernschild derart vorverarbeiten (preprocessing), dass das richtige Auslesen der einzelnen Elemente möglichst gut unterstützt wird
 \end{itemize}
@@ -15,7 +15,7 @@ Wie können wir Text auf Bildern auslesen?
 \begin{frame}{Nummernschild vorverarbeiten}
 
 \begin{itemize}
-\item Geeignetes Werkzeug: OpenCV
+\item Geeignetes Werkzeug: OpenCV \cite{opencv_tutorial}
 \item OpenCV ist eine plattformübergreifende Bibliothek, für Echtzeit-Computer-Vision-Anwendungen
 \item beinhaltet Algorithmen für die Bildverarbeitung und im Rahmen von Computer Vision (CV) auch für maschinelles Lernen
 \item Nutzung für die Verarbeitung des erkannten Nummernschildes (z.B. Thresholding), um die Zeichen besser zu erkennen und richtig auszulesen
@@ -29,7 +29,8 @@ OpenCV wurde bereits auf Nummernschildverarbeitung verwendet:
 \begin{figure}
 \begin{center}
 \includegraphics[scale=0.25]{bilder/Nummer_1.png}
-\caption{Original}
+\caption{Original
+\footnote{Bildquelle: \url{https://github.com/theAIGuysCode/yolov4-custom-functions}}}
 \label{Original}
 \end{center}
 \end{figure}
