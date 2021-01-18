@@ -5,7 +5,7 @@
 Wie können wir Text auf Bildern auslesen?
 
 \begin{itemize}
-\item Tesseract: freie Software zur Texterkennung mit vielen vorimplementierten Sprachen
+\item Tesseract: freie Software zur Texterkennung mit vielen vorimplementierten Sprachen \cite{smith_2007}
 \item Problem: Text wird größtenteils noch nicht richtig auf den unbearbeiteten Nummernschildern erkannt
 \item Lösung: das erkannte Nummernschild derart vorverarbeiten (preprocessing), dass das richtige Auslesen der einzelnen Elemente möglichst gut unterstützt wird
 \end{itemize}
@@ -15,10 +15,10 @@ Wie können wir Text auf Bildern auslesen?
 \begin{frame}{Nummernschild vorverarbeiten}
 
 \begin{itemize}
-\item Geeignetes Werkzeug: OpenCV
+\item Geeignetes Werkzeug: OpenCV \cite{opencv_tutorial}
 \item OpenCV ist eine plattformübergreifende Bibliothek, für Echtzeit-Computer-Vision-Anwendungen
 \item beinhaltet Algorithmen für die Bildverarbeitung und im Rahmen von Computer Vision (CV) auch für maschinelles Lernen
-\item Nutzung für die Verarbeitung des erkannten Nummernschildes (z.B. Tresholding), um die Zeichen besser zu erkennen und richtig auszulesen
+\item Nutzung für die Verarbeitung des erkannten Nummernschildes (z.B. Thresholding), um die Zeichen besser zu erkennen und richtig auszulesen
 \end{itemize}
 
 \end{frame}
@@ -29,7 +29,8 @@ OpenCV wurde bereits auf Nummernschildverarbeitung verwendet:
 \begin{figure}
 \begin{center}
 \includegraphics[scale=0.25]{bilder/Nummer_1.png}
-\caption{Original}
+\caption{Original
+\footnote{Bildquelle: \url{https://github.com/theAIGuysCode/yolov4-custom-functions}}}
 \label{Original}
 \end{center}
 \end{figure}
@@ -49,7 +50,7 @@ OpenCV wurde bereits auf Nummernschildverarbeitung verwendet:
 \begin{figure}
 \begin{center}
 \includegraphics[scale=0.25]{bilder/Nummer_3_treshold.png}
-\caption{Tresholding}
+\caption{Thresholding}
 \label{Tresholding}
 \end{center}
 \end{figure}
@@ -83,4 +84,17 @@ OpenCV wurde bereits auf Nummernschildverarbeitung verwendet:
 \end{figure}
 
 Auf das finale Bild (Abbildung 7) wird anschliessend Tesseract angewendet, das die Nummern und Buchstaben ausgibt
+\end{frame}
+
+\begin{frame}{Validierung der Texterkennung}
+    \textbf{Validierung:}
+    \begin{itemize}
+    \item Rastersuche über Parametereinstellungen für OpenCV
+    \item Validierung über \textit{character accuracy} \cite{ocr_accuracy}:
+    \begin{align*}
+    \frac{n - \# \textit{errors}}{n},
+    \end{align*}
+    wobei $n$ Anzahl der Zeichen im Datensatz und $\# \textit{errors}$ Anzahl der fehlerhaft erkannten Zeichen 
+    \item[$\rightarrow$] Parametereinstellungen mit höchstem \textit{character accuracy} werden für Texterkennung verwendet
+    \end{itemize}
 \end{frame}
