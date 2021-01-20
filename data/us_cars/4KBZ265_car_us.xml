@@ -1,0 +1,12 @@
+<root>
+                        <object>
+                            <name>4KBZ265</name>
+                            <bndbox>    
+                                <xmin>654</xmin>
+                                <ymin>270</ymin>
+                                <xmax>735</xmax>
+                                <ymax>310</ymax>
+                                <lp>4KBZ265</lp>
+                            </bndbox>
+                        </object>
+                     </root>

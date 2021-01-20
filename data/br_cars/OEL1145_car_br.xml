@@ -1,0 +1,12 @@
+<root>
+    <object>
+        <name>OEL1145</name>
+        <bndbox>    
+            <xmin>231</xmin>
+            <ymin>668</ymin>
+            <xmax>543</xmax>
+            <ymax>769</ymax>
+            <lp>OEL1145</lp>
+        </bndbox>
+    </object>
+</root>

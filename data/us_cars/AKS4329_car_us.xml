@@ -1,0 +1,12 @@
+<root>
+                        <object>
+                            <name>AKS4329</name>
+                            <bndbox>    
+                                <xmin>285</xmin>
+                                <ymin>124</ymin>
+                                <xmax>366</xmax>
+                                <ymax>164</ymax>
+                                <lp>AKS4329</lp>
+                            </bndbox>
+                        </object>
+                     </root>

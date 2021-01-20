@@ -1,0 +1,12 @@
+<root>
+                        <object>
+                            <name>SG8L7E</name>
+                            <bndbox>    
+                                <xmin>887</xmin>
+                                <ymin>205</ymin>
+                                <xmax>1021</xmax>
+                                <ymax>272</ymax>
+                                <lp>SG8L7E</lp>
+                            </bndbox>
+                        </object>
+                     </root>

@@ -1,0 +1,12 @@
+<root>
+    <object>
+        <name>RK896AO</name>
+        <bndbox>    
+            <xmin>154</xmin>
+            <ymin>208</ymin>
+            <xmax>285</xmax>
+            <ymax>238</ymax>
+            <lp>RK896AO</lp>
+        </bndbox>
+    </object>
+</root>

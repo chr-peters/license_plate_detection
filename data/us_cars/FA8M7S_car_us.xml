@@ -1,0 +1,12 @@
+<root>
+                        <object>
+                            <name>FA8M7S</name>
+                            <bndbox>    
+                                <xmin>253</xmin>
+                                <ymin>412</ymin>
+                                <xmax>334</xmax>
+                                <ymax>452</ymax>
+                                <lp>FA8M7S</lp>
+                            </bndbox>
+                        </object>
+                     </root>

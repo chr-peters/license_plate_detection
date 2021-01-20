@@ -1,0 +1,12 @@
+<root>
+    <object>
+        <name>OKP7250</name>
+        <bndbox>    
+            <xmin>499</xmin>
+            <ymin>921</ymin>
+            <xmax>815</xmax>
+            <ymax>1023</ymax>
+            <lp>OKP7250</lp>
+        </bndbox>
+    </object>
+</root>

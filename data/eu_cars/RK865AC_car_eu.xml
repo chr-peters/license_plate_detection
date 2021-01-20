@@ -1,0 +1,12 @@
+<root>
+    <object>
+        <name>RK865AC</name>
+        <bndbox>    
+            <xmin>214</xmin>
+            <ymin>224</ymin>
+            <xmax>341</xmax>
+            <ymax>253</ymax>
+            <lp>RK865AC</lp>
+        </bndbox>
+    </object>
+</root>

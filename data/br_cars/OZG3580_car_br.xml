@@ -1,0 +1,12 @@
+<root>
+    <object>
+        <name>OZG3580</name>
+        <bndbox>    
+            <xmin>459</xmin>
+            <ymin>566</ymin>
+            <xmax>891</xmax>
+            <ymax>706</ymax>
+            <lp>OZG3580</lp>
+        </bndbox>
+    </object>
+</root>

@@ -1,0 +1,12 @@
+<root>
+    <object>
+        <name>PUT6858</name>
+        <bndbox>    
+            <xmin>247</xmin>
+            <ymin>475</ymin>
+            <xmax>436</xmax>
+            <ymax>536</ymax>
+            <lp>PUT6858</lp>
+        </bndbox>
+    </object>
+</root>

@@ -1,0 +1,12 @@
+<root>
+                        <object>
+                            <name>6PGM335</name>
+                            <bndbox>    
+                                <xmin>620</xmin>
+                                <ymin>272</ymin>
+                                <xmax>705</xmax>
+                                <ymax>314</ymax>
+                                <lp>6PGM335</lp>
+                            </bndbox>
+                        </object>
+                     </root>

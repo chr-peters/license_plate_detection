@@ -1,0 +1,12 @@
+<root>
+    <object>
+        <name>BA738DE</name>
+        <bndbox>    
+            <xmin>223</xmin>
+            <ymin>184</ymin>
+            <xmax>318</xmax>
+            <ymax>205</ymax>
+            <lp>BA738DE</lp>
+        </bndbox>
+    </object>
+</root>

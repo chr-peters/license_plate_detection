@@ -1,0 +1,12 @@
+<root>
+                        <object>
+                            <name>DL3C2Z</name>
+                            <bndbox>    
+                                <xmin>516</xmin>
+                                <ymin>310</ymin>
+                                <xmax>626</xmax>
+                                <ymax>365</ymax>
+                                <lp>DL3C2Z</lp>
+                            </bndbox>
+                        </object>
+                     </root>

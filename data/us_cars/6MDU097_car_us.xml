@@ -1,0 +1,12 @@
+<root>
+                        <object>
+                            <name>6MDU097</name>
+                            <bndbox>    
+                                <xmin>716</xmin>
+                                <ymin>205</ymin>
+                                <xmax>801</xmax>
+                                <ymax>247</ymax>
+                                <lp>6MDU097</lp>
+                            </bndbox>
+                        </object>
+                     </root>

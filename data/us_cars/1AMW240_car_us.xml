@@ -1,0 +1,12 @@
+<root>
+                        <object>
+                            <name>1AMW240</name>
+                            <bndbox>    
+                                <xmin>395</xmin>
+                                <ymin>535</ymin>
+                                <xmax>516</xmax>
+                                <ymax>595</ymax>
+                                <lp>1AMW240</lp>
+                            </bndbox>
+                        </object>
+                     </root>

@@ -1,0 +1,12 @@
+<root>
+                        <object>
+                            <name>5ZUC921</name>
+                            <bndbox>    
+                                <xmin>512</xmin>
+                                <ymin>362</ymin>
+                                <xmax>619</xmax>
+                                <ymax>415</ymax>
+                                <lp>5ZUC921</lp>
+                            </bndbox>
+                        </object>
+                     </root>

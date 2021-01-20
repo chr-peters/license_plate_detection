@@ -1,0 +1,12 @@
+<root>
+                        <object>
+                            <name>ASC7399</name>
+                            <bndbox>    
+                                <xmin>642</xmin>
+                                <ymin>461</ymin>
+                                <xmax>829</xmax>
+                                <ymax>554</ymax>
+                                <lp>ASC7399</lp>
+                            </bndbox>
+                        </object>
+                     </root>

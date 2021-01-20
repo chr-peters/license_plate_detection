@@ -1,0 +1,12 @@
+<root>
+                        <object>
+                            <name>UF2V5S</name>
+                            <bndbox>    
+                                <xmin>356</xmin>
+                                <ymin>330</ymin>
+                                <xmax>417</xmax>
+                                <ymax>360</ymax>
+                                <lp>UF2V5S</lp>
+                            </bndbox>
+                        </object>
+                     </root>

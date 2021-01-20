@@ -1,0 +1,12 @@
+<root>
+                        <object>
+                            <name>WSG979</name>
+                            <bndbox>    
+                                <xmin>337</xmin>
+                                <ymin>536</ymin>
+                                <xmax>397</xmax>
+                                <ymax>566</ymax>
+                                <lp>WSG979</lp>
+                            </bndbox>
+                        </object>
+                     </root>

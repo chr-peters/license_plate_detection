@@ -1,0 +1,12 @@
+<root>
+                        <object>
+                            <name>CWM3083</name>
+                            <bndbox>    
+                                <xmin>477</xmin>
+                                <ymin>422</ymin>
+                                <xmax>611</xmax>
+                                <ymax>489</ymax>
+                                <lp>CWM3083</lp>
+                            </bndbox>
+                        </object>
+                     </root>

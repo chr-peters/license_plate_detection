@@ -1,0 +1,12 @@
+<root>
+                        <object>
+                            <name>AYE132</name>
+                            <bndbox>    
+                                <xmin>509</xmin>
+                                <ymin>253</ymin>
+                                <xmax>585</xmax>
+                                <ymax>291</ymax>
+                                <lp>AYE132</lp>
+                            </bndbox>
+                        </object>
+                     </root>

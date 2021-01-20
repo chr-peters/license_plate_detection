@@ -1,0 +1,12 @@
+<root>
+    <object>
+        <name>NYL3614</name>
+        <bndbox>    
+            <xmin>449</xmin>
+            <ymin>664</ymin>
+            <xmax>711</xmax>
+            <ymax>749</ymax>
+            <lp>NYL3614</lp>
+        </bndbox>
+    </object>
+</root>

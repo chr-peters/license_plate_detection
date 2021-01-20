@@ -1,0 +1,12 @@
+<root>
+    <object>
+        <name>NTO1053</name>
+        <bndbox>    
+            <xmin>560</xmin>
+            <ymin>552</ymin>
+            <xmax>851</xmax>
+            <ymax>646</ymax>
+            <lp>NTO1053</lp>
+        </bndbox>
+    </object>
+</root>

@@ -1,0 +1,12 @@
+<root>
+    <object>
+        <name>PXP8172</name>
+        <bndbox>    
+            <xmin>576</xmin>
+            <ymin>876</ymin>
+            <xmax>816</xmax>
+            <ymax>954</ymax>
+            <lp>PXP8172</lp>
+        </bndbox>
+    </object>
+</root>

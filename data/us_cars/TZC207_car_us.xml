@@ -1,0 +1,12 @@
+<root>
+                        <object>
+                            <name>TZC207</name>
+                            <bndbox>    
+                                <xmin>955</xmin>
+                                <ymin>387</ymin>
+                                <xmax>1030</xmax>
+                                <ymax>424</ymax>
+                                <lp>TZC207</lp>
+                            </bndbox>
+                        </object>
+                     </root>

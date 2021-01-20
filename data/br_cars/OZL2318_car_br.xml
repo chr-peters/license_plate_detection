@@ -1,0 +1,12 @@
+<root>
+    <object>
+        <name>OZL2318</name>
+        <bndbox>    
+            <xmin>592</xmin>
+            <ymin>800</ymin>
+            <xmax>891</xmax>
+            <ymax>897</ymax>
+            <lp>OZL2318</lp>
+        </bndbox>
+    </object>
+</root>

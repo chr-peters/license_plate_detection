@@ -1,0 +1,12 @@
+<root>
+                        <object>
+                            <name>3127K</name>
+                            <bndbox>    
+                                <xmin>386</xmin>
+                                <ymin>319</ymin>
+                                <xmax>475</xmax>
+                                <ymax>363</ymax>
+                                <lp>3127K</lp>
+                            </bndbox>
+                        </object>
+                     </root>

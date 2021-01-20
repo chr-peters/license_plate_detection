@@ -1,0 +1,12 @@
+<root>
+    <object>
+        <name>ODC9387</name>
+        <bndbox>    
+            <xmin>602</xmin>
+            <ymin>709</ymin>
+            <xmax>829</xmax>
+            <ymax>782</ymax>
+            <lp>ODC9387</lp>
+        </bndbox>
+    </object>
+</root>

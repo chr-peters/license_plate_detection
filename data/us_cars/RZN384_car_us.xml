@@ -1,0 +1,12 @@
+<root>
+                        <object>
+                            <name>RZN384</name>
+                            <bndbox>    
+                                <xmin>317</xmin>
+                                <ymin>521</ymin>
+                                <xmax>480</xmax>
+                                <ymax>602</ymax>
+                                <lp>RZN384</lp>
+                            </bndbox>
+                        </object>
+                     </root>

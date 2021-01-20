@@ -1,0 +1,12 @@
+<root>
+    <object>
+        <name>JQS5683</name>
+        <bndbox>    
+            <xmin>512</xmin>
+            <ymin>537</ymin>
+            <xmax>693</xmax>
+            <ymax>595</ymax>
+            <lp>JQS5683</lp>
+        </bndbox>
+    </object>
+</root>

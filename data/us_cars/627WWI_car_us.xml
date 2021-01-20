@@ -1,0 +1,12 @@
+<root>
+                        <object>
+                            <name>627WWI</name>
+                            <bndbox>    
+                                <xmin>243</xmin>
+                                <ymin>356</ymin>
+                                <xmax>358</xmax>
+                                <ymax>413</ymax>
+                                <lp>627WWI</lp>
+                            </bndbox>
+                        </object>
+                     </root>

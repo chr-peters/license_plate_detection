@@ -1,0 +1,12 @@
+<root>
+    <object>
+        <name>JRK5336</name>
+        <bndbox>    
+            <xmin>369</xmin>
+            <ymin>656</ymin>
+            <xmax>567</xmax>
+            <ymax>720</ymax>
+            <lp>JRK5336</lp>
+        </bndbox>
+    </object>
+</root>
