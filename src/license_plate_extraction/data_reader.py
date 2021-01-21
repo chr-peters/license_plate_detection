@@ -6,6 +6,11 @@ from pathlib import Path
 import tensorflow as tf
 
 
+def get_bounding_box_xml_path_from_image_path(path: Path) -> Path:
+    xml_path = path.with_suffix(".xml")
+    return xml_path
+
+
 def get_bounding_box_from_xml_path(path: Path) -> np.ndarray:
     """
     Returns np.array([x_min, y_min, x_max, y_max])
@@ -36,7 +41,7 @@ def read_image_as_tensor(path: Path) -> tf.Tensor:
 
 if __name__ == "__main__":
     sample_path = settings.DATA_DIR / "eu_cars+lps" / "1T43213_car_eu.jpg"
-    bounding_box_path = settings.DATA_DIR / "eu_cars+lps" / "1T43213_car_eu.xml"
+    bounding_box_path = get_bounding_box_xml_path_from_image_path(sample_path)
 
     img_tensor = read_image_as_tensor(sample_path)
 
