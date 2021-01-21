@@ -1,3 +1,5 @@
 numpy
 beautifulsoup4
 lxml
+tensorflow
+matplotlib
