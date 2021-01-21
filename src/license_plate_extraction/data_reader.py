@@ -4,6 +4,7 @@ import numpy as np
 from bs4 import BeautifulSoup
 from pathlib import Path
 import tensorflow as tf
+from typing import List
 
 
 def get_bounding_box_xml_path_from_image_path(path: Path) -> Path:
@@ -39,6 +40,12 @@ def read_image_as_tensor(path: Path) -> tf.Tensor:
     return img_tensor
 
 
+def get_image_paths_from_directory(directory_path: Path) -> List[Path]:
+    image_paths = list(directory_path.glob("*_car_*.jpg"))
+
+    return image_paths
+
+
 if __name__ == "__main__":
     sample_path = settings.DATA_DIR / "eu_cars+lps" / "1T43213_car_eu.jpg"
     bounding_box_path = get_bounding_box_xml_path_from_image_path(sample_path)
@@ -48,3 +55,13 @@ if __name__ == "__main__":
     bounding_box = get_bounding_box_from_xml_path(bounding_box_path)
 
     show_image(img_tensor, bounding_box)
+
+    # all_eu_image_paths = get_image_paths_from_directory(
+    #     settings.DATA_DIR / "eu_cars+lps"
+    # )
+    # for cur_path in all_eu_image_paths:
+    #     cur_img_tensor = read_image_as_tensor(cur_path)
+    #     cur_bounding_box_path = get_bounding_box_xml_path_from_image_path(cur_path)
+    #     cur_bounding_box = get_bounding_box_from_xml_path(cur_bounding_box_path)
+
+    #     show_image(cur_img_tensor, cur_bounding_box)
