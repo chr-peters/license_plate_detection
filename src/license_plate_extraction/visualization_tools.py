@@ -5,7 +5,7 @@ import matplotlib.patches as patches
 def show_image(img, bounding_box=None):
     fig, ax = plt.subplots()
 
-    ax.imshow(img)
+    ax.imshow(img, cmap="gray")
 
     if bounding_box is not None:
         x_min, y_min, x_max, y_max = bounding_box
