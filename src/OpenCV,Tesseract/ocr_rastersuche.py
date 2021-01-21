@@ -2,6 +2,7 @@ import cv2
 import numpy as np
 import pytesseract
 from Levenshtein import distance as levenshtein_distance
+import statistics
 
 # setze cmd auf das Verzeichnis, in dem auch Tesseract drin ist
 pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
@@ -9,6 +10,48 @@ pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tessera
 # lade ausserdem Dateinamen_Listen.spydata und xml_nummernschilder_einlesen.spydata
 # per drag&drop in den Variable explorer!
 
+
+############################# UEBERLEGUNGEN ###################################
+# gray_scaling auf jeden Fall drinlassen, das ist nuetzlich fuer Thresholding
+
+# verschiedene Ansaetze beim Thresholding (aus dem OpenCV Tutorial (S.52) und 
+# der zugehoerigen Dokumentation im Netz, siehe 
+# https://docs.opencv.org/3.4/d7/d4d/tutorial_py_thresholding.html):
+    # cv2.THRESH_BINARY (Wert fuer die Entscheidung variieren)
+    # cv2.THRESH_BINARY+cv2.THRESH.OTSU (Wert ist hier 0)
+    # adaptive.threshold mit mean (die blockSize und C variieren, ausserdem die 
+    # Methode variieren)
+    # adaptive.threshold mit gaussian (die blockSize und C variieren, ausserdem die 
+    # Methode variieren)
+# bei all diesen Ansaetzen auch einmal mit einer blur-methode (median, gauss) 
+# und ohne eine durchgehen?
+
+# geometrische Transformationen? viele Nummernschilder bzw. Zeichen sind schief
+# im Bild. glaube Tesseract hat damit Probleme (viele Zeichen werden im 
+# Tutorial unten nicht erkannt)
+# also z.B. resize! verwende beide Methoden aus dem Tutorial (S.59), an einem 
+# Bild habe ich keinen Unterschied feststellen koennen -> fuer mehrere Bilder
+# ausprobieren und dann fuer eins entscheiden?
+# Ausserdem auch affine transformation (S. 61), perspective transformation 
+# (S. 61)  ausprobieren?
+
+# image blurring (S.62ff): welchen Filter anwenden? Vor thresholding schalten?
+# mehrere Filter hintereinander anwenden?
+
+# morphologische Transformationen? (S.68)
+# dilation wie im Tutorial unten liefert bei meinem kleinen Test bestes 
+# Ergebnis, Buchstaben noch gut zu sehen, aber kleine schwarze Bereiche werden
+# sehr viel kleiner.
+# Trotzdem beide (erosion/dilation) ausprobieren?
+# Opening auch? Closing brauchen wir wohl nicht, zumindest wenn man sich das 
+# OpenCV Tutorial anschaut (S.70). Opening bietet bei meinem Beispiel mit 
+# rect_kern aus Tutorial unten anstelle von kernel besseres ergebnis.
+
+# -> welche Reihenfolge beim Preprocessing?! vermutlich thresholding zuletzt,
+#    nach resizen (anderen Transformationen) und nach blurring? und danach dann
+#    opening bzw. dilation?
+
+###############################################################################
 
 # Tutorial von the AI Guy einfach hier reinkopiert. keine Ahnung, was die ganzen
 # Funktionen so machen, aber im großen und ganzen sieht das schonmal nicht 
@@ -18,9 +61,8 @@ def ocr_try():
     lpnr_list = [None] * len(filenames_lpnr_gray)
     for i in range(0, len(filenames_lpnr_gray)):
         # Preprocessing:
-        gray = cv2.imread(filenames_lpnr_gray[i], 0)
-        gray = cv2.imread("Daten_gray/br_cars+lps\ODJ1599_lpnr_br_gray.jpg", 0)
-        gray = cv2.resize( gray, None, fx = 3, fy = 3, interpolation = cv2.INTER_CUBIC)
+        gray = cv2.imread(filenames_lpnr_gray[i], 0) # 0 liest direkt in grayscale ein
+        gray = cv2.resize(gray, None, fx = 3, fy = 3, interpolation = cv2.INTER_CUBIC)
         #cv2.imshow("gray", gray); cv2.waitKey(0)
         blur = cv2.GaussianBlur(gray, (5,5), 0)
         #cv2.imshow("gray", blur); cv2.waitKey(0)
@@ -63,8 +105,11 @@ def ocr_try():
             roi = thresh[y-5:y+h+5, x-5:x+w+5]
             roi = cv2.bitwise_not(roi)
             roi = cv2.medianBlur(roi, 5)
-            cv2.imshow("ROI", roi); cv2.waitKey(0)
-            text = pytesseract.image_to_string(roi, config='-c tessedit_char_whitelist=0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ --psm 8 --oem 3')
+            #cv2.imshow("ROI", roi); cv2.waitKey(0)
+            if type(roi) is not type(None):
+                text = pytesseract.image_to_string(roi, config='-c tessedit_char_whitelist=0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ --psm 8 --oem 3')
+            else: 
+                text = "?"
             #print(text)
             plate_num += text
         #print(plate_num)
@@ -75,7 +120,9 @@ def ocr_try():
     return lpnr_list
 
 
-# Levenshtein distance fuer zwei Listen:
+# Levenshtein distance fuer zwei Listen.
+# Ausgabe sind drei Objekte, eine Liste mit den Distanzen, der Mittelwert und 
+# der Median dieser.
 def distance(list1, list2):
     distances = [None] * len(list1)
     if len(list1) != len(list2):
@@ -84,18 +131,15 @@ def distance(list1, list2):
     else:
         for i in range(0, len(list1)):
             distances[i] = levenshtein_distance(list1[i], list2[i])
-    return distances
+    return distances, statistics.mean(distances), statistics.median(distances)
 
+###############################################################################
 
 # Ausfuehren:
-lpnr_liste = ocr_try() # noch error,
-# Vermutung: das objekt roi (wird in zeile 59 erzeugt) ist ein nonetype object
-#            und das kann tesseract natuerlich nicht auslesen. 
-# Warum ist es ein nonetype object? die ganzen schritte der bildbearbeitung 
-# bringen uns nicht zum ziel, die einzelnen buchstaben in konturen auszugeben, 
-# also sind gar keine konturen zu finden. Bspw bei Bild ODJ1599_lpnr_br_gray.jpg
-# passiert genau das.
-distance(lp_list[0:40], lpnr_liste)
+lpnr_liste = ocr_try()
+distances, mean, median = distance(lp_list, lpnr_liste)
+print(mean)
+print(median)
 
 
 
