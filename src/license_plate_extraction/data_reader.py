@@ -1,5 +1,5 @@
-from license_plate_extraction import settings
-from license_plate_extraction.visualization_tools import show_image
+import settings
+from visualization_tools import show_image
 import numpy as np
 from bs4 import BeautifulSoup
 from pathlib import Path
@@ -125,8 +125,8 @@ def make_dataset_from_image_paths(
 
 
 if __name__ == "__main__":
-    # images_directory = settings.DATA_DIR / "eu_cars+lps"
-    images_directory = settings.DATA_DIR / "us_cars+lps"
+    images_directory = settings.DATA_DIR / "eu_cars+lps"
+    # images_directory = settings.DATA_DIR / "us_cars+lps"
     image_path_list = get_image_paths_from_directory(images_directory)
 
     dataset = make_dataset_from_image_paths(
