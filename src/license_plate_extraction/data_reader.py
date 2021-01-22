@@ -79,7 +79,7 @@ def resize_bounding_box_with_pad(
 
 
 def make_dataset_from_image_paths(
-    image_path_list: List[Path], target_img_width, target_img_height
+    image_path_list: List[Path], target_img_height, target_img_width
 ) -> tf.data.Dataset:
     # read all the images as tensors
     image_tensors_list = [
@@ -130,7 +130,7 @@ if __name__ == "__main__":
     image_path_list = get_image_paths_from_directory(images_directory)
 
     dataset = make_dataset_from_image_paths(
-        image_path_list, target_img_width=500, target_img_height=500
+        image_path_list, target_img_height=500, target_img_width=500
     )
 
     example_list = list(dataset.as_numpy_iterator())
