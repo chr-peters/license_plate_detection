@@ -1,15 +1,16 @@
 from data_reader import get_image_paths_from_directory, make_dataset_from_image_paths
 from visualization_tools import show_image
+from preprocessing import bounding_box_in_pixel
 import settings
 import tensorflow as tf
 from tensorflow.keras import Input, Sequential, layers, losses, metrics
 import numpy as np
 
 
-def get_simple_model(input_height, input_width):
+def get_simple_model(input_height, input_width, num_channels):
     model = Sequential(
         [
-            Input(shape=(input_height, input_width, 1)),
+            Input(shape=(input_height, input_width, num_channels)),
             layers.experimental.preprocessing.Rescaling(
                 1.0 / 255,
             ),
@@ -20,7 +21,7 @@ def get_simple_model(input_height, input_width):
             layers.Conv2D(64, 3, padding="same", activation="relu"),
             layers.MaxPooling2D(),
             layers.Flatten(),
-            layers.Dense(4, activation="relu"),
+            layers.Dense(4, activation="sigmoid"),
         ]
     )
 
@@ -55,8 +56,8 @@ if __name__ == "__main__":
     image_path_list_test = np.delete(all_image_paths, train_indices)
 
     # read the images from the paths to create the training set
-    TARGET_IMG_HEIGHT = 200
-    TARGET_IMG_WIDTH = 200
+    TARGET_IMG_HEIGHT = 300
+    TARGET_IMG_WIDTH = 300
     dataset_train = make_dataset_from_image_paths(
         image_path_list_train,
         target_img_height=TARGET_IMG_HEIGHT,
@@ -77,7 +78,7 @@ if __name__ == "__main__":
 
     # get the model
     model = get_simple_model(
-        input_height=TARGET_IMG_HEIGHT, input_width=TARGET_IMG_WIDTH
+        input_height=TARGET_IMG_HEIGHT, input_width=TARGET_IMG_WIDTH, num_channels=3
     )
 
     print(model.summary())
@@ -96,4 +97,11 @@ if __name__ == "__main__":
         cur_image_batch = cur_example[0]
         cur_prediction_batch = model.predict(cur_image_batch)
         for cur_image, cur_prediction in zip(cur_image_batch, cur_prediction_batch):
-            show_image(cur_image.astype(int), bounding_box=cur_prediction)
+            show_image(
+                cur_image.astype(int),
+                bounding_box=bounding_box_in_pixel(
+                    cur_prediction,
+                    img_height=TARGET_IMG_HEIGHT,
+                    img_width=TARGET_IMG_WIDTH,
+                ),
+            )

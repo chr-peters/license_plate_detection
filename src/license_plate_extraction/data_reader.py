@@ -1,5 +1,11 @@
 import settings
 from visualization_tools import show_image
+from preprocessing import (
+    resize_bounding_box_with_pad,
+    scale_bounding_box,
+    bounding_box_in_percent,
+    bounding_box_in_pixel,
+)
 import numpy as np
 from bs4 import BeautifulSoup
 from pathlib import Path
@@ -46,38 +52,6 @@ def get_image_paths_from_directory(directory_path: Path) -> List[Path]:
     return image_paths
 
 
-def resize_bounding_box_with_pad(
-    bounding_box, img_width, img_height, target_width, target_height
-) -> np.ndarray:
-    x_min, y_min, x_max, y_max = bounding_box
-
-    img_aspect_ratio = img_width / img_height
-    target_aspect_ratio = target_width / target_height
-
-    if target_aspect_ratio >= img_aspect_ratio:
-        # the target image is wider which means that the sides are padded
-        y_min_new = y_min / img_height * target_height
-        y_max_new = y_max / img_height * target_height
-
-        img_width_new = img_aspect_ratio * target_height
-        left_padding = (target_width - img_width_new) / 2
-
-        x_min_new = left_padding + x_min / img_width * img_width_new
-        x_max_new = left_padding + x_max / img_width * img_width_new
-    else:
-        # the target image is taller which means that top and bottom is padded
-        x_min_new = x_min / img_width * target_width
-        x_max_new = x_max / img_width * target_width
-
-        img_height_new = 1 / img_aspect_ratio * target_width
-        top_padding = (target_height - img_height_new) / 2
-
-        y_min_new = top_padding + y_min / img_height * img_height_new
-        y_max_new = top_padding + y_max / img_height * img_height_new
-
-    return np.array([x_min_new, y_min_new, x_max_new, y_max_new])
-
-
 def make_dataset_from_image_paths(
     image_path_list: List[Path], target_img_height, target_img_width
 ) -> tf.data.Dataset:
@@ -88,10 +62,9 @@ def make_dataset_from_image_paths(
 
     # resize them
     image_tensors_list_resized = [
-        tf.image.resize_with_pad(
+        tf.image.resize(
             cur_image_tensor,
-            target_height=target_img_height,
-            target_width=target_img_width,
+            size=(target_img_height, target_img_width),
             antialias=True,
         )
         for cur_image_tensor in image_tensors_list
@@ -105,19 +78,24 @@ def make_dataset_from_image_paths(
         for cur_img_path in image_path_list
     ]
 
-    bounding_boxes_list_resized = [
-        resize_bounding_box_with_pad(
-            cur_bounding_box,
-            img_width=image_tensors_list[i].shape[1],
-            img_height=image_tensors_list[i].shape[0],
-            target_width=target_img_width,
-            target_height=target_img_height,
+    bounding_boxes_list_resized_percent = [
+        bounding_box_in_percent(
+            scale_bounding_box(
+                cur_bounding_box,
+                img_height=image_tensors_list[i].shape[0],
+                img_width=image_tensors_list[i].shape[1],
+                target_img_height=target_img_height,
+                target_img_width=target_img_width,
+            ),
+            img_height=target_img_height,
+            img_width=target_img_width,
         )
         for i, cur_bounding_box in enumerate(bounding_boxes_list)
     ]
 
-    images = tf.image.rgb_to_grayscale(tf.stack(image_tensors_list_resized))
-    bounding_boxes = tf.stack(bounding_boxes_list_resized)
+    # images = tf.image.rgb_to_grayscale(tf.stack(image_tensors_list_resized))
+    images = tf.stack(image_tensors_list_resized)
+    bounding_boxes = tf.stack(bounding_boxes_list_resized_percent)
 
     dataset = tf.data.Dataset.from_tensor_slices((images, bounding_boxes))
 
@@ -129,11 +107,24 @@ if __name__ == "__main__":
     # images_directory = settings.DATA_DIR / "us_cars+lps"
     image_path_list = get_image_paths_from_directory(images_directory)
 
+    TARGET_IMG_HEIGHT = 500
+    TARGET_IMG_WIDTH = 500
+
     dataset = make_dataset_from_image_paths(
-        image_path_list, target_img_height=500, target_img_width=500
+        image_path_list,
+        target_img_height=TARGET_IMG_HEIGHT,
+        target_img_width=TARGET_IMG_WIDTH,
     )
 
     example_list = list(dataset.as_numpy_iterator())
 
     for cur_example in example_list:
-        show_image(cur_example[0].astype(int), bounding_box=cur_example[1])
+        print(cur_example[1])
+        show_image(
+            cur_example[0].astype(int),
+            bounding_box=bounding_box_in_pixel(
+                cur_example[1],
+                img_height=TARGET_IMG_HEIGHT,
+                img_width=TARGET_IMG_WIDTH,
+            ),
+        )
