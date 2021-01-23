@@ -5,6 +5,7 @@ import settings
 import tensorflow as tf
 from tensorflow.keras import Input, Sequential, layers, losses, metrics
 import numpy as np
+import datetime
 
 
 def get_simple_model(input_height, input_width, num_channels):
@@ -21,6 +22,7 @@ def get_simple_model(input_height, input_width, num_channels):
             layers.Conv2D(64, 3, padding="same", activation="relu"),
             layers.MaxPooling2D(),
             layers.Flatten(),
+            layers.Dropout(0.2),
             layers.Dense(4, activation="sigmoid"),
         ]
     )
@@ -65,7 +67,7 @@ if __name__ == "__main__":
     )
 
     # set the batch size
-    BATCH_SIZE = 64
+    BATCH_SIZE = 1
     dataset_train = dataset_train.batch(BATCH_SIZE)
 
     # do the same for the test set
@@ -89,7 +91,20 @@ if __name__ == "__main__":
         metrics=[metrics.MeanSquaredError()],
     )
 
-    model.fit(dataset_train, epochs=50, validation_data=dataset_test)
+    # add logs and callback for tensorboard
+    log_dir = settings.LOG_DIR / (
+        "training_" + datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+    )
+    tensorboard_callback = tf.keras.callbacks.TensorBoard(
+        log_dir=log_dir, histogram_freq=1
+    )
+
+    model.fit(
+        dataset_train,
+        epochs=100,
+        validation_data=dataset_test,
+        callbacks=[tensorboard_callback],
+    )
 
     # visualize the test set predictions
     example_list = list(dataset_test.as_numpy_iterator())
