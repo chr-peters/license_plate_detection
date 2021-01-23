@@ -8,10 +8,7 @@ def show_image(img, bounding_box=None):
     ax.imshow(img, cmap="gray")
 
     if bounding_box is not None:
-        x_min, y_min, x_max, y_max = bounding_box
-
-        width = x_max - x_min
-        height = y_max - y_min
+        x_min, y_min, width, height = bounding_box
 
         rectangle = patches.Rectangle(
             xy=(x_min, y_min),

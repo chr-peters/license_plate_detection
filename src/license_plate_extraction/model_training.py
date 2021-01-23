@@ -65,7 +65,7 @@ if __name__ == "__main__":
     )
 
     # set the batch size
-    BATCH_SIZE = 1
+    BATCH_SIZE = 64
     dataset_train = dataset_train.batch(BATCH_SIZE)
 
     # do the same for the test set
@@ -89,7 +89,7 @@ if __name__ == "__main__":
         metrics=[metrics.MeanSquaredError()],
     )
 
-    model.fit(dataset_train, epochs=10, validation_data=dataset_test)
+    model.fit(dataset_train, epochs=50, validation_data=dataset_test)
 
     # visualize the test set predictions
     example_list = list(dataset_test.as_numpy_iterator())

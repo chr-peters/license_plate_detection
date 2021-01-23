@@ -1,7 +1,6 @@
 import settings
 from visualization_tools import show_image
 from preprocessing import (
-    resize_bounding_box_with_pad,
     scale_bounding_box,
     bounding_box_in_percent,
     bounding_box_in_pixel,
@@ -20,7 +19,7 @@ def get_bounding_box_xml_path_from_image_path(path: Path) -> Path:
 
 def get_bounding_box_from_xml_path(path: Path) -> np.ndarray:
     """
-    Returns np.array([x_min, y_min, x_max, y_max])
+    Returns np.array([x_min, y_min, width, height])
     """
     with open(path, mode="r") as file:
         bs = BeautifulSoup(file, "xml")
@@ -30,7 +29,7 @@ def get_bounding_box_from_xml_path(path: Path) -> np.ndarray:
     y_min = float(bs.bndbox.ymin.string)
     y_max = float(bs.bndbox.ymax.string)
 
-    return np.array([x_min, y_min, x_max, y_max])
+    return np.array([x_min, y_min, x_max - x_min, y_max - y_min])
 
 
 def read_image_as_tensor(path: Path) -> tf.Tensor:

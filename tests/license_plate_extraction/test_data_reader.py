@@ -9,8 +9,8 @@ def test_read_eu_bounding_box():
 
     assert np.isclose(result[0], 213) == True
     assert np.isclose(result[1], 214) == True
-    assert np.isclose(result[2], 314) == True
-    assert np.isclose(result[3], 237) == True
+    assert np.isclose(result[2], 314 - 213) == True
+    assert np.isclose(result[3], 237 - 214) == True
 
 
 def test_read_br_bounding_box():
@@ -20,8 +20,8 @@ def test_read_br_bounding_box():
 
     assert np.isclose(result[0], 528) == True
     assert np.isclose(result[1], 412) == True
-    assert np.isclose(result[2], 690) == True
-    assert np.isclose(result[3], 464) == True
+    assert np.isclose(result[2], 690 - 528) == True
+    assert np.isclose(result[3], 464 - 412) == True
 
 
 def test_read_ro_bounding_box():
@@ -31,8 +31,8 @@ def test_read_ro_bounding_box():
 
     assert np.isclose(result[0], 1400) == True
     assert np.isclose(result[1], 1144) == True
-    assert np.isclose(result[2], 1875) == True
-    assert np.isclose(result[3], 1293) == True
+    assert np.isclose(result[2], 1875 - 1400) == True
+    assert np.isclose(result[3], 1293 - 1144) == True
 
 
 def test_read_us_bounding_box():
@@ -42,8 +42,8 @@ def test_read_us_bounding_box():
 
     assert np.isclose(result[0], 911) == True
     assert np.isclose(result[1], 136) == True
-    assert np.isclose(result[2], 973) == True
-    assert np.isclose(result[3], 167) == True
+    assert np.isclose(result[2], 973 - 911) == True
+    assert np.isclose(result[3], 167 - 136) == True
 
 
 def test_eu_bounding_box_path_from_image_path():

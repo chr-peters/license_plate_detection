@@ -3,7 +3,7 @@ import numpy as np
 
 
 def test_bounding_box_percent():
-    bounding_box = np.array([213, 214, 314, 237])
+    bounding_box = np.array([213, 214, 101, 23])
 
     img_height = 432
     img_width = 576
@@ -14,14 +14,14 @@ def test_bounding_box_percent():
 
     assert (
         np.allclose(
-            bounding_box_percent, np.array([213 / 576, 214 / 432, 314 / 576, 237 / 432])
+            bounding_box_percent, np.array([213 / 576, 214 / 432, 101 / 576, 23 / 432])
         )
         == True
     )
 
 
 def test_bounding_box_pixel():
-    bounding_box = np.array([213 / 576, 214 / 432, 314 / 576, 237 / 432])
+    bounding_box = np.array([213 / 576, 214 / 432, 101 / 576, 23 / 432])
 
     img_height = 432
     img_width = 576
@@ -30,4 +30,4 @@ def test_bounding_box_pixel():
         bounding_box, img_height, img_width
     )
 
-    assert np.allclose(bounding_box_pixel, np.array([213, 214, 314, 237])) == True
+    assert np.allclose(bounding_box_pixel, np.array([213, 214, 101, 23])) == True
