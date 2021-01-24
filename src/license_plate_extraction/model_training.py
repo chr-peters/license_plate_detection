@@ -3,31 +3,10 @@ from visualization_tools import show_image
 from preprocessing import bounding_box_in_pixel
 import settings
 import tensorflow as tf
-from tensorflow.keras import Input, Sequential, layers, losses, metrics
+from tensorflow.keras import losses, metrics
 import numpy as np
 import datetime
-
-
-def get_simple_model(input_height, input_width, num_channels):
-    model = Sequential(
-        [
-            Input(shape=(input_height, input_width, num_channels)),
-            layers.experimental.preprocessing.Rescaling(
-                1.0 / 255,
-            ),
-            layers.Conv2D(16, 3, padding="same", activation="relu"),
-            layers.MaxPooling2D(),
-            layers.Conv2D(32, 3, padding="same", activation="relu"),
-            layers.MaxPooling2D(),
-            layers.Conv2D(64, 3, padding="same", activation="relu"),
-            layers.MaxPooling2D(),
-            layers.Flatten(),
-            layers.Dropout(0.2),
-            layers.Dense(4, activation="sigmoid"),
-        ]
-    )
-
-    return model
+import models
 
 
 if __name__ == "__main__":
@@ -58,8 +37,8 @@ if __name__ == "__main__":
     image_path_list_test = np.delete(all_image_paths, train_indices)
 
     # read the images from the paths to create the training set
-    TARGET_IMG_HEIGHT = 300
-    TARGET_IMG_WIDTH = 300
+    TARGET_IMG_HEIGHT = 448
+    TARGET_IMG_WIDTH = 448
     dataset_train = make_dataset_from_image_paths(
         image_path_list_train,
         target_img_height=TARGET_IMG_HEIGHT,
@@ -67,7 +46,7 @@ if __name__ == "__main__":
     )
 
     # set the batch size
-    BATCH_SIZE = 1
+    BATCH_SIZE = 32
     dataset_train = dataset_train.batch(BATCH_SIZE)
 
     # do the same for the test set
@@ -79,17 +58,13 @@ if __name__ == "__main__":
     dataset_test = dataset_test.batch(BATCH_SIZE)
 
     # get the model
-    model = get_simple_model(
+    model = models.tiny_yolo_inspired(
         input_height=TARGET_IMG_HEIGHT, input_width=TARGET_IMG_WIDTH, num_channels=3
     )
 
     print(model.summary())
 
-    model.compile(
-        optimizer="adam",
-        loss=losses.MSE,
-        metrics=[metrics.MeanSquaredError()],
-    )
+    model.compile(optimizer="adam", loss=losses.MSE)
 
     # add logs and callback for tensorboard
     log_dir = settings.LOG_DIR / (
@@ -112,6 +87,7 @@ if __name__ == "__main__":
         cur_image_batch = cur_example[0]
         cur_prediction_batch = model.predict(cur_image_batch)
         for cur_image, cur_prediction in zip(cur_image_batch, cur_prediction_batch):
+            print(cur_prediction)
             show_image(
                 cur_image.astype(int),
                 bounding_box=bounding_box_in_pixel(
