@@ -119,6 +119,13 @@ if __name__ == "__main__":
 
     for cur_example in example_list:
         print(cur_example[1])
+        print(
+            bounding_box_in_pixel(
+                cur_example[1],
+                img_height=TARGET_IMG_HEIGHT,
+                img_width=TARGET_IMG_WIDTH,
+            )
+        )
         show_image(
             cur_example[0].astype(int),
             bounding_box=bounding_box_in_pixel(
