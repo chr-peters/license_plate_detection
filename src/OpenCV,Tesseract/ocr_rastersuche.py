@@ -183,8 +183,8 @@ for i in range(64):
 def ocr_one(img, schwellenwert, character):
     im = cv2.imread(img, cv2.IMREAD_GRAYSCALE)
     gray = cv2.resize(im, None, fx = 3, fy = 3, interpolation = cv2.INTER_CUBIC)
-    blur_g = cv2.GaussianBlur(gray, kernel_g, 0)
-    blur = cv2.medianBlur(blur_g, kernel_m)
+    blur_g = cv2.GaussianBlur(gray, (5,5), 0)
+    blur = cv2.medianBlur(blur_g, 3)
     ret, thresh = cv2.threshold(blur, schwellenwert, 255, cv2.THRESH_BINARY_INV)
     rect_kern = cv2.getStructuringElement(cv2.MORPH_RECT, (3,3))
     dilation = cv2.dilate(thresh, rect_kern, iterations = 1)

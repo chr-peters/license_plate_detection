@@ -15,8 +15,8 @@ pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tessera
 def ocr_one(img, bounding_box, schwellenwert, character):
     # bounding box + gray scaling
     gray = cv2.resize(img, None, fx = 3, fy = 3, interpolation = cv2.INTER_CUBIC)
-    blur_g = cv2.GaussianBlur(gray, kernel_g, 0)
-    blur = cv2.medianBlur(blur_g, kernel_m)
+    blur_g = cv2.GaussianBlur(gray, (5,5), 0)
+    blur = cv2.medianBlur(blur_g, 3)
     ret, thresh = cv2.threshold(blur, schwellenwert, 255, cv2.THRESH_BINARY_INV)
     rect_kern = cv2.getStructuringElement(cv2.MORPH_RECT, (3,3))
     dilation = cv2.dilate(thresh, rect_kern, iterations = 1)
