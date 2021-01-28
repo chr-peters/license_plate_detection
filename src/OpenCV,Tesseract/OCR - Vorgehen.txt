@@ -1,3 +1,5 @@
+### Erst settings.py, dann ocr_rastersuche.py und dann ocr_pipeline_testung.py anschauen!
+
 - ziemlich schnell klar, dass es OpenCV für die Vorverarbeitung der Bilder und Tesseract zum Auslesen der Nummernschilder 
   werden würden
   außerdem war schnell klar, dass wir jedes Zeichen einzeln auslesen lassen wollen und nicht das ganze Nummernschild zusammen
@@ -7,6 +9,9 @@
 - Überlegung, den Datensatz in Test- und Trainingsdaten aufzuteilen wurde wieder verworfen, da wir im Grunde nichts anlernen.
   Wir testen aus, welche Vorverarbeitungen sich am besten eignen, das können wir auch mit allen Daten machen und dann direkt 
   mit diesen validieren
+
+### In "settings_ocr.py" werden Listen erschaffen, die die Dateipfade fuer die Bilder der Autos und der Nummernschilder 
+### und die die wahren Zeichenfolgen der Nummernschilder beinhalten. Gespeichert sind die Listen in "settings.spydata"
 
 - Erste Annäherung an eine mögliche Pipeline orientiert sich stark am Tutorial von The AI Guy auf Github (müsste die Quelle
   in unserem Vortrag sein):
@@ -19,6 +24,9 @@
   - die Konturen, die noch ins Schmema passen, werden mit pytesseract ausgelesen (wobei Tesseract nur Großbuchstaben und 
     Zahlen vorgegeben werden, es die Kontur nur als einen einzigen chatacter behandeln soll (psm 8) und oem 3 ist 
     der default-Wert
+### Tutorial ist in "ocr_rastersuche.py"
+### In "ocr_rastersuche_mitUeberlegungen.py" ist grosses Kuddelmuddel, allerdings sind da noch ein paar Saetze zu den 
+### OpenCV-Funktionen mit drin
 
 - Aufgrund des Tutorials haben wir uns überlegt, welche Vorverarbeitungen wir machen wollen. Relativ schnell klar war uns, 
   dass wir die Reihenfolge der Vorverarbeitung auch so machen wollen wie im Tutorial. 
@@ -32,6 +40,7 @@
      Nummernschilder hauptsächlich vom Schwellenwert abhängt. Der Einfluss der Filter-Methoden ist zu vernachlässigen und auch
      die Wahl der Kerne spielt keine so große Rolle. (für alle Prozesse ergaben sich durchschnittliche Distanzen zwischen 
      (selten) 4, 5-7 (die Nummernschilder haben nur 7 Zeichen))
+#### Zu finden sind die Erkenntnisse hieraus in "ocr_rastersuche.py" und die Ausgaben in "ocr_rastersuche.spydata"
 
 - Einigung auf die folgenden Pipeline:
   - Vergrößern des Bildes, Gaußfilter mit Kern (5,5), Medianfilter mit Kern 3, Schwellenwertverfahren (gleich mehr), Dilation
@@ -53,3 +62,5 @@
     das Nummernschild schon korrekt ausgelesen haben und keine anderen Schwellenwerte mehr anwenden müssen)
   -> diese Pipeline ergibt für alle Nummernschilder eine mittlere Distanz von 3.28. Es ist also schonmal besser als die 64 
      vorherigen Schritte
+###  Zu finden ist der Test der Pipeline fuer die 437 Nummernschilder unter "ocr_pipeline_testung.py" und die Ausgabe der 
+     Datei ist in "ocr_pipeline_test.spydata"
