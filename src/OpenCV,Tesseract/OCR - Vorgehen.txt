@@ -1,0 +1,55 @@
+- ziemlich schnell klar, dass es OpenCV für die Vorverarbeitung der Bilder und Tesseract zum Auslesen der Nummernschilder 
+  werden würden
+  außerdem war schnell klar, dass wir jedes Zeichen einzeln auslesen lassen wollen und nicht das ganze Nummernschild zusammen
+
+- zum Vergleichen des Auslesens mit den wahren Zeichenfolgen auf den Nummernschildern verwenden wir die Levenshtein-Distanz
+
+- Überlegung, den Datensatz in Test- und Trainingsdaten aufzuteilen wurde wieder verworfen, da wir im Grunde nichts anlernen.
+  Wir testen aus, welche Vorverarbeitungen sich am besten eignen, das können wir auch mit allen Daten machen und dann direkt 
+  mit diesen validieren
+
+- Erste Annäherung an eine mögliche Pipeline orientiert sich stark am Tutorial von The AI Guy auf Github (müsste die Quelle
+  in unserem Vortrag sein):
+  - liest Bild direkt in Graustufen ein
+  - vergrößert das Bild dann und wendet einen Gaußfilter und einen Medianfilter auf das Bild an
+  - nutzt das Schwellenwertverfahren mit dem Otsu-Verfahren und macht dann noch dilation
+  - auf dem Bild werden dann alle Konturen gesucht und sortiert dann alle gefundenen Konturen nach ihren linken oberen Ecken
+  - es folgt eine Schleife, in der über alle Konturen gegangen wird, wobei Konturen, die zu klein sein können für Zeichen auf
+    einem Nummernschild herausgeworfen werden
+  - die Konturen, die noch ins Schmema passen, werden mit pytesseract ausgelesen (wobei Tesseract nur Großbuchstaben und 
+    Zahlen vorgegeben werden, es die Kontur nur als einen einzigen chatacter behandeln soll (psm 8) und oem 3 ist 
+    der default-Wert
+
+- Aufgrund des Tutorials haben wir uns überlegt, welche Vorverarbeitungen wir machen wollen. Relativ schnell klar war uns, 
+  dass wir die Reihenfolge der Vorverarbeitung auch so machen wollen wie im Tutorial. 
+- Getestet haben wir verschiedene Filter-Methoden (Gauß und Median zusammen, nur Gauß, nur Median) mit verschiedenen Kernen
+  (je (5,5) und (3,3) für Gauß, 5 und 3 für Median) und für das Schwellenwertverfahren haben wir verschiedene Schwellenwerte
+  getestet, nachdem schnell klar wurde, dass die Otsu-Methode nicht so gute Ergebnisse liefert (Schwellenwerte 20, 50, 90, 
+  120, 150, 190, 220, 250; BINARY_INV, da so Konturen besser erkannt werden). Darüber Rastersuche, sodass wir auf 64 
+  verschiedene Vorverarbeitungsprozesse kamen. (Vergrößerung, dilation und opening sind als feste Schritte mit in den 
+  Prozessen mit drin)
+  -> Anwendung der 64 Methoden auf alle Nummernschilder brachte uns die Erkenntnis, dass ein gutes und richtiges Auslesen der 
+     Nummernschilder hauptsächlich vom Schwellenwert abhängt. Der Einfluss der Filter-Methoden ist zu vernachlässigen und auch
+     die Wahl der Kerne spielt keine so große Rolle. (für alle Prozesse ergaben sich durchschnittliche Distanzen zwischen 
+     (selten) 4, 5-7 (die Nummernschilder haben nur 7 Zeichen))
+
+- Einigung auf die folgenden Pipeline:
+  - Vergrößern des Bildes, Gaußfilter mit Kern (5,5), Medianfilter mit Kern 3, Schwellenwertverfahren (gleich mehr), Dilation
+    und Opening (für die genauen Parameter siehe Pipeline)
+  - Finden aller Konturen und Sortierung dieser nach linker oberen Ecke
+  - Nur die Konturen in pytesseract eingeben, die folgende Bedingungen erfüllen:
+    - Wenn die Höhe der Kontur nicht 1/4 der Höhe des ganzen Bildes ist, überspringe die Kontur
+    - Wenn das Verhältnis der Höhe zur Breite der Kontur nicht mindestens 1.2 ist, überspringe die Kontur (Konturen die etwas 
+      rechteckiger sind als ein Quadrat sind erwünscht)
+    - Wenn die Breite des Bildes geteilt durch die Breite der Kontur nicht einen Wert von 25 erreicht, überspringe die Kontur
+    - Wenn die Kontur zu unseren Bedingungen passt, schneide aus dem Schwellenwertbild die Kontur etwas größer aus (+5). 
+      Dann machen wir schwarze Pixel zu weißen und umgekehrt (aus BINARY_INV ist es noch weißter Text auf schwarzem 
+      Hintergrund, Tesseract mag aber lieber schwarzen Text auf weißem Hintergrund) und wenden nochmal einen Medianfilter mit
+      Kern 5 an
+    - pytesseract wird genauso verwendet wie schon im Tutorial oben
+  - Da der Erfolg des Auslesens vom Schwellenwert abhängt, wird das Vorgehen für verschiedene Schwellenwerte (70, 80, 90, 100,
+    110, 120, 130, 140, 150) wiederholt und das Nummernschild wird jeweils ausgelesen. Es werden die Zeichen ausgegeben, die 
+    die kleinste Distanz ergaben (dabei wird das Verfahren abgebochen, sollte sich eine Distanz von 0 ergeben, da wir dann 
+    das Nummernschild schon korrekt ausgelesen haben und keine anderen Schwellenwerte mehr anwenden müssen)
+  -> diese Pipeline ergibt für alle Nummernschilder eine mittlere Distanz von 3.28. Es ist also schonmal besser als die 64 
+     vorherigen Schritte
