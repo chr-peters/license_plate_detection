@@ -34,6 +34,8 @@
   um Muster zu erkennen. Leider gibt es kein richtiges Merkmal, beide Zeichen voneinander zu unterscheiden. Auf einem Bild war das O minimal breiter als die Null. 
   Das ist aber nicht immer so. Man kann nur in der Bildbeschriftung sehen, ob es sich um ein O oder eine 0 handelt. Das es keine Muster gibt (z.B., dass ein O
   grundsätzlich nur unter den ersten 3 Zeichen stehen kann oder Nullen nur hinten) ist eine Unterscheidung vermutlich nicht möglich, oder?
+- NACHTRAG: Es gibt wohl doch eine Möglichkeit, beide zu unterscheiden. Andere Leute hatten dasselbe Problem. Ich sehe mir das in Ruhe an. Möglicherweise 
+  müssen wir das auch mit 1 und I machen...
 
 - Aufgrund des Tutorials haben wir uns überlegt, welche Vorverarbeitungen wir machen wollen. Relativ schnell klar war uns, 
   dass wir die Reihenfolge der Vorverarbeitung auch so machen wollen wie im Tutorial, weil wir andere Reihenfolgen angetestet haben, die allerdings zu einem
