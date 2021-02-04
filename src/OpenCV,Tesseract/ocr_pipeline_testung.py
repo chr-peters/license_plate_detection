@@ -5,9 +5,6 @@ from Levenshtein import distance as levenshtein_distance
 import pylev
 import statistics
 
-# Setze cmd auf das Verzeichnis, in dem auch Tesseract drin ist
-pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
-
 # Lade ausserdem settings.spydata
 # Enthalten sind die Listen mit den Dateipfaden fuer die Bilder der Autos und der
 # Nummernschilder je in bunt und in grau. Ausserdem ist die Liste mit den wahren
@@ -25,6 +22,9 @@ pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tessera
 # Output: dist      = Levenshtein-Distanz der erkannten Zeichenkette zur wahren
 #         plate_num = erkannte Zeichenkette
 def ocr_one(img, schwellenwert, character, ausgabe, ausgabe_thresh, name, tes):
+    # Setze cmd auf das Verzeichnis, in dem auch Tesseract drin ist
+    pytesseract.pytesseract.tesseract_cmd = r"tesseract.exe"
+    
     # Preprocessing:
     img = cv2.imread(img, cv2.IMREAD_GRAYSCALE)
     gray = cv2.resize(img, None, fx = 3, fy = 3, interpolation = cv2.INTER_CUBIC)
