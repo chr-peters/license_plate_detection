@@ -5,12 +5,12 @@ from Levenshtein import distance as levenshtein_distance
 import pylev
 import statistics
 
-# Setze cmd auf das Verzeichnis, in dem auch Tesseract drin ist
-pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
-
 ###############################################################################
 
-def ocr_one(img, bounding_box, schwellenwert):
+def ocr_pipeline(img, bounding_box):
+    # Setze cmd auf das Verzeichnis, in dem auch Tesseract drin ist
+    pytesseract.pytesseract.tesseract_cmd = r"tesseract.exe"
+    
     # Aus Bild das Nummernschild extrahieren:
     x = int(round(bounding_box[0] * img.shape[0]))
     y = int(round(bounding_box[1] * img.shape[1]))
@@ -19,13 +19,14 @@ def ocr_one(img, bounding_box, schwellenwert):
 
     img_bound = img[y:y+h, x:x+w]
     # Preprocessing:
-    gray = cv2.resize(img_bound, None, fx = 3, fy = 3, interpolation = cv2.INTER_CUBIC)
+    gray = cv2.cvtColor(img_bound, cv2.COLOR_BGR2GRAY)
+    gray = cv2.resize(gray, None, fx = 3, fy = 3, interpolation = cv2.INTER_CUBIC)
     blur_g = cv2.GaussianBlur(gray, (5,5), 0)
     blur = cv2.medianBlur(blur_g, 3)
-    ret, thresh = cv2.threshold(blur, schwellenwert, 255, cv2.THRESH_BINARY_INV)
+    ret, thresh = cv2.threshold(blur, 0, 255, cv2.THRESH_BINARY_INV+cv2.THRESH_OTSU)
     rect_kern = cv2.getStructuringElement(cv2.MORPH_RECT, (3,3))
     dilation = cv2.dilate(thresh, rect_kern, iterations = 1)
-    opening = cv2.morphologyEx(dilation, cv2.MORPH_OPEN, rect_kern)
+    opening = cv2.morphologyEx(dilation, cv2.MORPH_OPEN, rect_kern) 
     # Konturen:
     contours, hierarchy = cv2.findContours(opening, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
     sorted_contours = sorted(contours, key=lambda ctr: cv2.boundingRect(ctr)[0])
@@ -54,20 +55,3 @@ def ocr_one(img, bounding_box, schwellenwert):
     return plate_num
 
 
-def ocr_final(img, bounding_box, schwellenwerte):
-    # Nummernschild aus Bild extrahieren:
-    image = irgendwas
-    
-    n = len(schwellenwerte)
-    dist = [None] * n
-    plate = [None] * n
-    
-    for i in range(n):
-        dist[i], plate[i] = ocr_one(image, schwellenwerte[i])
-        if dist[i] == 0: break 
-    
-    while None in dist: dist.remove(None)
-    while None in plate: plate.remove(None)
-    index_min = np.argmin(dist)
-    
-    return plate[index_min]
