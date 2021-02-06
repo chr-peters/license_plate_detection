@@ -8,24 +8,17 @@ from pathlib import Path
 
 
 def make_prediction(image_path: Path) -> str:
+    """
+    :returns: bounding_box (percent), license_plate_string
+    """
     image_tensor = data_reader.read_image_as_tensor(image_path)
 
-    # TODO: predict bounding box.
-    # for now: use the true bounding box
-    predicted_bounding_box = data_reader.get_bounding_box_from_xml_path(
-        data_reader.get_bounding_box_xml_path_from_image_path(image_path)
-    )
-    img_height = image_tensor.shape[0]
-    img_width = image_tensor.shape[1]
-    predicted_bounding_box = preprocessing.bounding_box_in_percent(
-        predicted_bounding_box, img_height, img_width
-    )
+    predicted_bounding_box = predict_bounding_box(image_tensor)
 
     image_numpy = image_tensor.numpy()
+    ocr_prediction = ocr_pipeline(image_numpy, predicted_bounding_box)
 
-    prediction = ocr_pipeline(image_numpy, predicted_bounding_box)
-
-    return prediction
+    return predicted_bounding_box, ocr_prediction
 
 
 if __name__ == "__main__":
@@ -37,8 +30,13 @@ if __name__ == "__main__":
     #make_prediction(test_path)
 
     for cur_path in image_paths:
-        cur_prediction = make_prediction(cur_path)
+        cur_bounding_box, cur_prediction = make_prediction(cur_path)
         print(cur_prediction)
 
         cur_image_tensor = data_reader.read_image_as_tensor(cur_path)
-        visualization_tools.show_image(cur_image_tensor)
+        cur_bounding_box_pixel = preprocessing.bounding_box_in_pixel(
+            cur_bounding_box, cur_image_tensor.shape[0], cur_image_tensor.shape[1]
+        )
+        visualization_tools.show_image(
+            cur_image_tensor, cur_bounding_box_pixel, cur_prediction
+        )
