@@ -28,7 +28,7 @@ def show_image(img, bounding_box=None, plate_text=""):
                 s=plate_text,
                 color="red",
                 fontweight="bold",
-                fontsize="large",
+                fontsize="xx-large",
             )
 
     plt.show()
