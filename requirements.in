@@ -5,3 +5,7 @@ tensorflow
 matplotlib
 jupyterlab
 tensorboard-plugin-profile
+opencv-python
+pytesseract
+pylev
+python-Levenshtein
