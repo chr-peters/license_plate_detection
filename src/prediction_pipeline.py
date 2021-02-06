@@ -33,8 +33,8 @@ if __name__ == "__main__":
 
     image_paths = data_reader.get_image_paths_from_directory(image_dir_eu)
 
-    # test_path = image_dir_eu / "BS47040_car_eu.jpg"
-    # make_prediction(test_path)
+    #test_path = image_dir_eu / "BS47040_car_eu.jpg"
+    #make_prediction(test_path)
 
     for cur_path in image_paths:
         cur_prediction = make_prediction(cur_path)
