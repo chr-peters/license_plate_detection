@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import matplotlib.patches as patches
 
 
-def show_image(img, bounding_box=None):
+def show_image(img, bounding_box=None, plate_text=""):
     fig, ax = plt.subplots()
 
     ax.imshow(img, cmap="gray")
@@ -20,5 +20,15 @@ def show_image(img, bounding_box=None):
         )
 
         ax.add_patch(rectangle)
+
+        if not plate_text == "":
+            ax.text(
+                x=x_min,
+                y=y_min,
+                s=plate_text,
+                color="red",
+                fontweight="bold",
+                fontsize="large",
+            )
 
     plt.show()

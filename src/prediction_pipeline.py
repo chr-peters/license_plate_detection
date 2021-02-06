@@ -37,4 +37,6 @@ if __name__ == "__main__":
         cur_bounding_box_pixel = preprocessing.bounding_box_in_pixel(
             cur_bounding_box, cur_image_tensor.shape[0], cur_image_tensor.shape[1]
         )
-        visualization_tools.show_image(cur_image_tensor, cur_bounding_box_pixel)
+        visualization_tools.show_image(
+            cur_image_tensor, cur_bounding_box_pixel, cur_prediction
+        )
