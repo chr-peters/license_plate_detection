@@ -1,3 +1,8 @@
+import os
+
+# suppress tensorflows verbose logging
+os.environ["TF_CPP_MIN_LOG_LEVEL"] = "3"
+
 import click
 from pathlib import Path
 from prediction_pipeline import make_prediction
