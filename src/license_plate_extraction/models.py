@@ -82,6 +82,36 @@ def test_model(input_height, input_width, num_channels):
 
     return model
 
+def test_model2(input_height, input_width, num_channels):
+    model = Sequential(
+        [
+            Input(shape=(input_height, input_width, num_channels)),
+            layers.experimental.preprocessing.Rescaling(
+                1.0 / 255,
+            ),
+            layers.Conv2D(32, kernel_size=(5,5), padding="same", activation="relu"),
+            layers.MaxPooling2D((2,2), strides=(2,2)),
+            layers.Conv2D(64, (5,5), padding="same", activation="relu"),
+            layers.MaxPooling2D((2,2)),
+            layers.Conv2D(64, 3, padding="same", activation="relu"),
+            layers.MaxPooling2D((2,2)),
+            layers.Conv2D(128, 3, padding="same", activation="relu"),
+            layers.MaxPooling2D((2,2)),
+            layers.Conv2D(256, 3, padding="same", activation="relu"),
+            layers.MaxPooling2D((2,2)),
+            layers.Conv2D(64, 3, padding="same", activation="relu"),
+            layers.MaxPooling2D((2,2)),
+            layers.Conv2D(32, 3, padding="same", activation="relu"),
+            layers.MaxPooling2D((2,2)),
+            layers.Flatten(),
+            layers.Dropout(0.2),
+            layer.Dense(512, activation="relu"),
+            layers.Dense(4, activation="sigmoid", use_bias=False),
+        ]
+    )
+
+    return model
+
 
 
 if __name__ == "__main__":
