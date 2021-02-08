@@ -1,5 +1,6 @@
 import tensorflow as tf
 from tensorflow.keras import Sequential, Input, layers
+from kerastuner.tuners import RandomSearch
 
 
 def simple_model(input_height, input_width, num_channels):
@@ -80,6 +81,33 @@ def test_model(input_height, input_width, num_channels):
     )
 
     return model
+
+
+def test_model_tuner(hp, input_height, input_width, num_channels):
+  model = keras.Sequential()
+  
+  model.add(Input(shape=(input_height, input_width, num_channels)),
+            layers.experimental.preprocessing.Rescaling(
+                1.0 / 255,
+            ))
+
+  model.add(layers.AveragePooling2D())
+
+  for i in range(hp.Int("Conv Layers", min_value=1, max_value=3)):
+    model.add(layers.Conv2D(hp.Choice(f"layer_{i}_filters", [16,32,64]), 3, activation="relu"))
+
+  model.add(layers.MaxPool2D(2, 2))
+  model.add(layers.Dropout(0.5))
+  model.add(layers.Flatten())
+
+  model.add(layers.Dense(hp.Choice("Dense layer", [64, 128, 256, 512, 1025]), activation="relu"))
+
+  model.add(layers.Dense(3, activation="softmax"))
+
+  model.compile(optimizer="adam",
+              loss=losses.MSE)
+  
+  return model
 
 
 if __name__ == "__main__":
