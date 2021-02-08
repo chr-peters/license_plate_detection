@@ -1,9 +1,6 @@
 import cv2
 import numpy as np
 import pytesseract
-from Levenshtein import distance as levenshtein_distance
-import pylev
-import statistics
 from pathlib import Path
 
 ###############################################################################
