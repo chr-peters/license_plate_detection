@@ -28,7 +28,9 @@ def ocr_pipeline(img, bounding_box):
     dilation = cv2.dilate(thresh, rect_kern, iterations=1)
     opening = cv2.morphologyEx(dilation, cv2.MORPH_OPEN, rect_kern)
     # Konturen:
-    contours, hierarchy = cv2.findContours(opening, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+    contours, hierarchy = cv2.findContours(
+        opening, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE
+    )
     sorted_contours = sorted(contours, key=lambda ctr: cv2.boundingRect(ctr)[0])
 
     plate_num = ""
@@ -61,6 +63,11 @@ def ocr_pipeline(img, bounding_box):
 
     return plate_num
 
-ocr_pipeline(cv2.imread("G:\Statistik\FallstudienII\Projekt2\Code\Daten\eu_cars+lps/BS47040_car_eu.jpg"), (92/387,201/600,(229-201)/600,(214-92)/387))
 
-
+if __name__ == "__main__":
+    ocr_pipeline(
+        cv2.imread(
+            "G:\Statistik\FallstudienII\Projekt2\Code\Daten\eu_cars+lps/BS47040_car_eu.jpg"
+        ),
+        (92 / 387, 201 / 600, (229 - 201) / 600, (214 - 92) / 387),
+    )
