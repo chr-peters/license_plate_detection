@@ -1,6 +1,5 @@
 import tensorflow as tf
 from tensorflow.keras import Sequential, Input, layers
-from kerastuner.tuners import RandomSearch
 
 
 def simple_model(input_height, input_width, num_channels):
