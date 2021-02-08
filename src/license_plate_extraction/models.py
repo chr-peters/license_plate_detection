@@ -86,8 +86,8 @@ def test_model(input_height, input_width, num_channels):
 def test_model_tuner(input_height, input_width, num_channels):
   model = Sequential()
   
-  model.add(Input(shape=(input_height, input_width, num_channels)),
-            layers.experimental.preprocessing.Rescaling(
+  model.add(Input(shape=(input_height, input_width, num_channels)))
+  model.add(layers.experimental.preprocessing.Rescaling(
                 1.0 / 255,
             ))
 
