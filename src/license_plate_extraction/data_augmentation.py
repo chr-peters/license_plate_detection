@@ -88,9 +88,9 @@ if __name__ == "__main__":
     images_directory_us = settings.DATA_DIR / "us_cars+lps"
 
     image_path_list = [
-        *get_image_paths_from_directory(images_directory_br),
-        *get_image_paths_from_directory(images_directory_eu),
-        *get_image_paths_from_directory(images_directory_ro),
+        #*get_image_paths_from_directory(images_directory_br),
+        #*get_image_paths_from_directory(images_directory_eu),
+        #*get_image_paths_from_directory(images_directory_ro),
         *get_image_paths_from_directory(images_directory_us),
     ]
 
