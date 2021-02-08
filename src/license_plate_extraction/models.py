@@ -104,7 +104,7 @@ def test_model2(input_height, input_width, num_channels):
             layers.MaxPooling2D((2,2)),
             layers.Flatten(),
             layers.Dropout(0.2),
-            layer.Dense(512, activation="relu"),
+            layers.Dense(512, activation="relu"),
             layers.Dense(4, activation="sigmoid", use_bias=False),
         ]
     )
