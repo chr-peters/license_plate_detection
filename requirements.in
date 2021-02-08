@@ -9,3 +9,5 @@ opencv-python
 pytesseract
 pylev
 python-Levenshtein
+PyQt5
+click
