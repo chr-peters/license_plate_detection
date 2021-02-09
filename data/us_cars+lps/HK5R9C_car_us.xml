@@ -1,0 +1,12 @@
+<root>
+                        <object>
+                            <name>HK5R9C</name>
+                            <bndbox>    
+                                <xmin>1047</xmin>
+                                <ymin>316</ymin>
+                                <xmax>1108</xmax>
+                                <ymax>346</ymax>
+                                <lp>HK5R9C</lp>
+                            </bndbox>
+                        </object>
+                     </root>

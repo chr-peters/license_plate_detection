@@ -1,0 +1,12 @@
+<root>
+    <object>
+        <name>OZR2224</name>
+        <bndbox>    
+            <xmin>492</xmin>
+            <ymin>918</ymin>
+            <xmax>844</xmax>
+            <ymax>1032</ymax>
+            <lp>OZR2224</lp>
+        </bndbox>
+    </object>
+</root>

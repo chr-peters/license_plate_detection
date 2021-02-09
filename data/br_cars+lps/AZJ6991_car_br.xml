@@ -1,0 +1,12 @@
+<root>
+    <object>
+        <name>AZJ6991</name>
+        <bndbox>    
+            <xmin>560</xmin>
+            <ymin>642</ymin>
+            <xmax>796</xmax>
+            <ymax>718</ymax>
+            <lp>AZJ6991</lp>
+        </bndbox>
+    </object>
+</root>

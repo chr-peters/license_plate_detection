@@ -1,0 +1,26 @@
+<annotation>
+	<folder>Bogdan</folder>
+	<filename>DSCF2399.JPG</filename>
+	<path>Z:\chowdhury\1_lpr_detection+ocr\ims++\ro\Bogdan\DSCF2399.JPG</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>2304</width>
+		<height>1728</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>IS07YTT</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>1154</xmin>
+			<ymin>619</ymin>
+			<xmax>1233</xmax>
+			<ymax>641</ymax>
+		</bndbox>
+	</object>
+</annotation>

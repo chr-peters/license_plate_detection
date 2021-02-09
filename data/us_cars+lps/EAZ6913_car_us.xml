@@ -1,0 +1,12 @@
+<root>
+                        <object>
+                            <name>EAZ6913</name>
+                            <bndbox>    
+                                <xmin>310</xmin>
+                                <ymin>273</ymin>
+                                <xmax>639</xmax>
+                                <ymax>437</ymax>
+                                <lp>EAZ6913</lp>
+                            </bndbox>
+                        </object>
+                     </root>

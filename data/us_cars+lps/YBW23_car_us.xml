@@ -1,0 +1,12 @@
+<root>
+                        <object>
+                            <name>YBW23</name>
+                            <bndbox>    
+                                <xmin>385</xmin>
+                                <ymin>195</ymin>
+                                <xmax>493</xmax>
+                                <ymax>249</ymax>
+                                <lp>YBW23</lp>
+                            </bndbox>
+                        </object>
+                     </root>

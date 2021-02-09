@@ -1,0 +1,12 @@
+<root>
+                        <object>
+                            <name>5LTA600</name>
+                            <bndbox>    
+                                <xmin>286</xmin>
+                                <ymin>383</ymin>
+                                <xmax>378</xmax>
+                                <ymax>429</ymax>
+                                <lp>5LTA600</lp>
+                            </bndbox>
+                        </object>
+                     </root>

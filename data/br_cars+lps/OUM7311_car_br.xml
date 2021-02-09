@@ -1,0 +1,12 @@
+<root>
+    <object>
+        <name>OUM7311</name>
+        <bndbox>    
+            <xmin>512</xmin>
+            <ymin>477</ymin>
+            <xmax>719</xmax>
+            <ymax>544</ymax>
+            <lp>OUM7311</lp>
+        </bndbox>
+    </object>
+</root>

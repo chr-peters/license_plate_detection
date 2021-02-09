@@ -1,0 +1,12 @@
+<root>
+                        <object>
+                            <name>5CJP303</name>
+                            <bndbox>    
+                                <xmin>482</xmin>
+                                <ymin>292</ymin>
+                                <xmax>568</xmax>
+                                <ymax>335</ymax>
+                                <lp>5CJP303</lp>
+                            </bndbox>
+                        </object>
+                     </root>

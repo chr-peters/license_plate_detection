@@ -1,0 +1,12 @@
+<root>
+                        <object>
+                            <name>EMR7094</name>
+                            <bndbox>    
+                                <xmin>692</xmin>
+                                <ymin>470</ymin>
+                                <xmax>948</xmax>
+                                <ymax>598</ymax>
+                                <lp>EMR7094</lp>
+                            </bndbox>
+                        </object>
+                     </root>

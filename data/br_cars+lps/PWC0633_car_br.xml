@@ -1,0 +1,12 @@
+<root>
+    <object>
+        <name>PWC0633</name>
+        <bndbox>    
+            <xmin>449</xmin>
+            <ymin>622</ymin>
+            <xmax>693</xmax>
+            <ymax>701</ymax>
+            <lp>PWC0633</lp>
+        </bndbox>
+    </object>
+</root>

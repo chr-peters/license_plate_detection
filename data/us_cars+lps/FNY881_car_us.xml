@@ -1,0 +1,12 @@
+<root>
+                        <object>
+                            <name>FNY881</name>
+                            <bndbox>    
+                                <xmin>545</xmin>
+                                <ymin>243</ymin>
+                                <xmax>612</xmax>
+                                <ymax>276</ymax>
+                                <lp>FNY881</lp>
+                            </bndbox>
+                        </object>
+                     </root>

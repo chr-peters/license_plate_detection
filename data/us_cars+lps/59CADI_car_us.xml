@@ -1,0 +1,12 @@
+<root>
+                        <object>
+                            <name>59CADI</name>
+                            <bndbox>    
+                                <xmin>260</xmin>
+                                <ymin>248</ymin>
+                                <xmax>347</xmax>
+                                <ymax>291</ymax>
+                                <lp>59CADI</lp>
+                            </bndbox>
+                        </object>
+                     </root>

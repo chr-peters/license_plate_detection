@@ -1,0 +1,12 @@
+<root>
+    <object>
+        <name>GWAGEN</name>
+        <bndbox>    
+            <xmin>141</xmin>
+            <ymin>259</ymin>
+            <xmax>280</xmax>
+            <ymax>291</ymax>
+            <lp>GWAGEN</lp>
+        </bndbox>
+    </object>
+</root>

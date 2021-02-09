@@ -1,0 +1,12 @@
+<root>
+                        <object>
+                            <name>SK5K9V</name>
+                            <bndbox>    
+                                <xmin>35</xmin>
+                                <ymin>463</ymin>
+                                <xmax>107</xmax>
+                                <ymax>499</ymax>
+                                <lp>SK5K9V</lp>
+                            </bndbox>
+                        </object>
+                     </root>

@@ -1,0 +1,12 @@
+<root>
+                        <object>
+                            <name>CYZ5139</name>
+                            <bndbox>    
+                                <xmin>730</xmin>
+                                <ymin>332</ymin>
+                                <xmax>870</xmax>
+                                <ymax>402</ymax>
+                                <lp>CYZ5139</lp>
+                            </bndbox>
+                        </object>
+                     </root>

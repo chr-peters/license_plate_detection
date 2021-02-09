@@ -1,0 +1,12 @@
+<root>
+                        <object>
+                            <name>7FR971</name>
+                            <bndbox>    
+                                <xmin>505</xmin>
+                                <ymin>403</ymin>
+                                <xmax>641</xmax>
+                                <ymax>471</ymax>
+                                <lp>7FR971</lp>
+                            </bndbox>
+                        </object>
+                     </root>

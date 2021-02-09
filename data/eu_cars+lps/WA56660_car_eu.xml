@@ -1,0 +1,12 @@
+<root>
+    <object>
+        <name>WA56660</name>
+        <bndbox>    
+            <xmin>238</xmin>
+            <ymin>314</ymin>
+            <xmax>316</xmax>
+            <ymax>332</ymax>
+            <lp>WA56660</lp>
+        </bndbox>
+    </object>
+</root>

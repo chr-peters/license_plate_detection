@@ -1,0 +1,12 @@
+<root>
+                        <object>
+                            <name>TTP488</name>
+                            <bndbox>    
+                                <xmin>621</xmin>
+                                <ymin>313</ymin>
+                                <xmax>684</xmax>
+                                <ymax>344</ymax>
+                                <lp>TTP488</lp>
+                            </bndbox>
+                        </object>
+                     </root>

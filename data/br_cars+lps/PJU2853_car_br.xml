@@ -1,0 +1,12 @@
+<root>
+    <object>
+        <name>PJU2853</name>
+        <bndbox>    
+            <xmin>434</xmin>
+            <ymin>721</ymin>
+            <xmax>713</xmax>
+            <ymax>811</ymax>
+            <lp>PJU2853</lp>
+        </bndbox>
+    </object>
+</root>

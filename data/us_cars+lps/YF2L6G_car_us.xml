@@ -1,0 +1,12 @@
+<root>
+                        <object>
+                            <name>YF2L6G</name>
+                            <bndbox>    
+                                <xmin>288</xmin>
+                                <ymin>334</ymin>
+                                <xmax>351</xmax>
+                                <ymax>365</ymax>
+                                <lp>YF2L6G</lp>
+                            </bndbox>
+                        </object>
+                     </root>

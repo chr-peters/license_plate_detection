@@ -1,0 +1,12 @@
+<root>
+    <object>
+        <name>PJP8208</name>
+        <bndbox>    
+            <xmin>176</xmin>
+            <ymin>489</ymin>
+            <xmax>446</xmax>
+            <ymax>576</ymax>
+            <lp>PJP8208</lp>
+        </bndbox>
+    </object>
+</root>

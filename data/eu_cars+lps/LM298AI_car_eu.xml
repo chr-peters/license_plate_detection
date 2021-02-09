@@ -1,0 +1,12 @@
+<root>
+    <object>
+        <name>LM298AI</name>
+        <bndbox>    
+            <xmin>165</xmin>
+            <ymin>282</ymin>
+            <xmax>289</xmax>
+            <ymax>310</ymax>
+            <lp>LM298AI</lp>
+        </bndbox>
+    </object>
+</root>

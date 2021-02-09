@@ -1,0 +1,12 @@
+<root>
+    <object>
+        <name>BS47040</name>
+        <bndbox>    
+            <xmin>92</xmin>
+            <ymin>201</ymin>
+            <xmax>214</xmax>
+            <ymax>229</ymax>
+            <lp>BS47040</lp>
+        </bndbox>
+    </object>
+</root>

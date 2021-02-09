@@ -1,0 +1,12 @@
+<root>
+                        <object>
+                            <name>AG0R6T</name>
+                            <bndbox>    
+                                <xmin>52</xmin>
+                                <ymin>284</ymin>
+                                <xmax>145</xmax>
+                                <ymax>330</ymax>
+                                <lp>AG0R6T</lp>
+                            </bndbox>
+                        </object>
+                     </root>

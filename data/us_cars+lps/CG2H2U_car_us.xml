@@ -1,0 +1,12 @@
+<root>
+                        <object>
+                            <name>CG2H2U</name>
+                            <bndbox>    
+                                <xmin>315</xmin>
+                                <ymin>328</ymin>
+                                <xmax>407</xmax>
+                                <ymax>374</ymax>
+                                <lp>CG2H2U</lp>
+                            </bndbox>
+                        </object>
+                     </root>

@@ -1,0 +1,12 @@
+<root>
+                        <object>
+                            <name>BTZ7148</name>
+                            <bndbox>    
+                                <xmin>844</xmin>
+                                <ymin>395</ymin>
+                                <xmax>989</xmax>
+                                <ymax>467</ymax>
+                                <lp>BTZ7148</lp>
+                            </bndbox>
+                        </object>
+                     </root>

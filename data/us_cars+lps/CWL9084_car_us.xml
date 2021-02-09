@@ -1,0 +1,12 @@
+<root>
+                        <object>
+                            <name>CWL9084</name>
+                            <bndbox>    
+                                <xmin>610</xmin>
+                                <ymin>395</ymin>
+                                <xmax>751</xmax>
+                                <ymax>465</ymax>
+                                <lp>CWL9084</lp>
+                            </bndbox>
+                        </object>
+                     </root>

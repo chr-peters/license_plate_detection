@@ -1,0 +1,12 @@
+<root>
+                        <object>
+                            <name>SK2W6K</name>
+                            <bndbox>    
+                                <xmin>355</xmin>
+                                <ymin>427</ymin>
+                                <xmax>504</xmax>
+                                <ymax>501</ymax>
+                                <lp>SK2W6K</lp>
+                            </bndbox>
+                        </object>
+                     </root>

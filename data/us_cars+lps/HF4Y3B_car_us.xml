@@ -1,0 +1,12 @@
+<root>
+                        <object>
+                            <name>HF4Y3B</name>
+                            <bndbox>    
+                                <xmin>273</xmin>
+                                <ymin>318</ymin>
+                                <xmax>352</xmax>
+                                <ymax>357</ymax>
+                                <lp>HF4Y3B</lp>
+                            </bndbox>
+                        </object>
+                     </root>

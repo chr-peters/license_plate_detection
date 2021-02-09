@@ -1,0 +1,12 @@
+<root>
+                        <object>
+                            <name>CC2881</name>
+                            <bndbox>    
+                                <xmin>261</xmin>
+                                <ymin>291</ymin>
+                                <xmax>512</xmax>
+                                <ymax>416</ymax>
+                                <lp>CC2881</lp>
+                            </bndbox>
+                        </object>
+                     </root>

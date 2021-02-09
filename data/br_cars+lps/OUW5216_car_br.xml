@@ -1,0 +1,12 @@
+<root>
+    <object>
+        <name>OUW5216</name>
+        <bndbox>    
+            <xmin>535</xmin>
+            <ymin>478</ymin>
+            <xmax>771</xmax>
+            <ymax>554</ymax>
+            <lp>OUW5216</lp>
+        </bndbox>
+    </object>
+</root>

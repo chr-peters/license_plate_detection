@@ -1,0 +1,12 @@
+<root>
+    <object>
+        <name>RK776AI</name>
+        <bndbox>    
+            <xmin>311</xmin>
+            <ymin>206</ymin>
+            <xmax>469</xmax>
+            <ymax>242</ymax>
+            <lp>RK776AI</lp>
+        </bndbox>
+    </object>
+</root>

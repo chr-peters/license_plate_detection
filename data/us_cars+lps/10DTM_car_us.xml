@@ -1,0 +1,12 @@
+<root>
+                        <object>
+                            <name>10DTM</name>
+                            <bndbox>    
+                                <xmin>546</xmin>
+                                <ymin>323</ymin>
+                                <xmax>740</xmax>
+                                <ymax>420</ymax>
+                                <lp>10DTM</lp>
+                            </bndbox>
+                        </object>
+                     </root>

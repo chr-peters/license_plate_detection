@@ -1,0 +1,12 @@
+<root>
+    <object>
+        <name>OUP1442</name>
+        <bndbox>    
+            <xmin>622</xmin>
+            <ymin>717</ymin>
+            <xmax>833</xmax>
+            <ymax>785</ymax>
+            <lp>OUP1442</lp>
+        </bndbox>
+    </object>
+</root>

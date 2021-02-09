@@ -1,0 +1,12 @@
+<root>
+    <object>
+        <name>JRV1942</name>
+        <bndbox>    
+            <xmin>561</xmin>
+            <ymin>621</ymin>
+            <xmax>824</xmax>
+            <ymax>706</ymax>
+            <lp>JRV1942</lp>
+        </bndbox>
+    </object>
+</root>

@@ -1,0 +1,12 @@
+<root>
+    <object>
+        <name>BA268IM</name>
+        <bndbox>    
+            <xmin>233</xmin>
+            <ymin>130</ymin>
+            <xmax>336</xmax>
+            <ymax>153</ymax>
+            <lp>BA268IM</lp>
+        </bndbox>
+    </object>
+</root>
