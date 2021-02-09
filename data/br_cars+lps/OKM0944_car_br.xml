@@ -1,0 +1,12 @@
+<root>
+    <object>
+        <name>OKM0944</name>
+        <bndbox>    
+            <xmin>300</xmin>
+            <ymin>595</ymin>
+            <xmax>526</xmax>
+            <ymax>668</ymax>
+            <lp>OKM0944</lp>
+        </bndbox>
+    </object>
+</root>

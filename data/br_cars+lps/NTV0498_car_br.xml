@@ -1,0 +1,12 @@
+<root>
+    <object>
+        <name>NTV0498</name>
+        <bndbox>    
+            <xmin>622</xmin>
+            <ymin>658</ymin>
+            <xmax>861</xmax>
+            <ymax>735</ymax>
+            <lp>NTV0498</lp>
+        </bndbox>
+    </object>
+</root>

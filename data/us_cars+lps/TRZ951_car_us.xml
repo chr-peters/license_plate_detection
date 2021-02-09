@@ -1,0 +1,12 @@
+<root>
+                        <object>
+                            <name>TRZ951</name>
+                            <bndbox>    
+                                <xmin>296</xmin>
+                                <ymin>539</ymin>
+                                <xmax>395</xmax>
+                                <ymax>588</ymax>
+                                <lp>TRZ951</lp>
+                            </bndbox>
+                        </object>
+                     </root>

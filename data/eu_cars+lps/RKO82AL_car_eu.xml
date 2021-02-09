@@ -1,0 +1,12 @@
+<root>
+    <object>
+        <name>RKO82AL</name>
+        <bndbox>    
+            <xmin>160</xmin>
+            <ymin>136</ymin>
+            <xmax>288</xmax>
+            <ymax>165</ymax>
+            <lp>RKO82AL</lp>
+        </bndbox>
+    </object>
+</root>

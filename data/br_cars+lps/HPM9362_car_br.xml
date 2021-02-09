@@ -1,0 +1,12 @@
+<root>
+    <object>
+        <name>HPM9362</name>
+        <bndbox>    
+            <xmin>584</xmin>
+            <ymin>673</ymin>
+            <xmax>843</xmax>
+            <ymax>757</ymax>
+            <lp>HPM9362</lp>
+        </bndbox>
+    </object>
+</root>

@@ -1,0 +1,12 @@
+<root>
+    <object>
+        <name>OLC4728</name>
+        <bndbox>    
+            <xmin>517</xmin>
+            <ymin>412</ymin>
+            <xmax>784</xmax>
+            <ymax>498</ymax>
+            <lp>OLC4728</lp>
+        </bndbox>
+    </object>
+</root>

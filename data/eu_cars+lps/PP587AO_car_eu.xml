@@ -1,0 +1,12 @@
+<root>
+    <object>
+        <name>PP587AO</name>
+        <bndbox>    
+            <xmin>188</xmin>
+            <ymin>209</ymin>
+            <xmax>295</xmax>
+            <ymax>233</ymax>
+            <lp>PP587AO</lp>
+        </bndbox>
+    </object>
+</root>

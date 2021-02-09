@@ -1,0 +1,12 @@
+<root>
+                        <object>
+                            <name>N359973</name>
+                            <bndbox>    
+                                <xmin>566</xmin>
+                                <ymin>452</ymin>
+                                <xmax>625</xmax>
+                                <ymax>481</ymax>
+                                <lp>N359973</lp>
+                            </bndbox>
+                        </object>
+                     </root>

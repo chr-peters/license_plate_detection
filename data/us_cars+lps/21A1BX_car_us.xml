@@ -1,0 +1,12 @@
+<root>
+                        <object>
+                            <name>21A1BX</name>
+                            <bndbox>    
+                                <xmin>225</xmin>
+                                <ymin>337</ymin>
+                                <xmax>305</xmax>
+                                <ymax>377</ymax>
+                                <lp>21A1BX</lp>
+                            </bndbox>
+                        </object>
+                     </root>

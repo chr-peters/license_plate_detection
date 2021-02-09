@@ -1,0 +1,12 @@
+<root>
+                        <object>
+                            <name>CLT0108</name>
+                            <bndbox>    
+                                <xmin>573</xmin>
+                                <ymin>238</ymin>
+                                <xmax>629</xmax>
+                                <ymax>266</ymax>
+                                <lp>CLT0108</lp>
+                            </bndbox>
+                        </object>
+                     </root>

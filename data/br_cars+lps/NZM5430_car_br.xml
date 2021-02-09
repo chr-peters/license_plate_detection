@@ -1,0 +1,12 @@
+<root>
+    <object>
+        <name>NZM5430</name>
+        <bndbox>    
+            <xmin>446</xmin>
+            <ymin>680</ymin>
+            <xmax>812</xmax>
+            <ymax>798</ymax>
+            <lp>NZM5430</lp>
+        </bndbox>
+    </object>
+</root>

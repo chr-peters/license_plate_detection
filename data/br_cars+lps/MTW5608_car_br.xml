@@ -1,0 +1,12 @@
+<root>
+    <object>
+        <name>MTW5608</name>
+        <bndbox>    
+            <xmin>438</xmin>
+            <ymin>577</ymin>
+            <xmax>776</xmax>
+            <ymax>686</ymax>
+            <lp>MTW5608</lp>
+        </bndbox>
+    </object>
+</root>

@@ -1,0 +1,12 @@
+<root>
+                        <object>
+                            <name>NEILDMND</name>
+                            <bndbox>    
+                                <xmin>841</xmin>
+                                <ymin>666</ymin>
+                                <xmax>1068</xmax>
+                                <ymax>779</ymax>
+                                <lp>NEILDMND</lp>
+                            </bndbox>
+                        </object>
+                     </root>

@@ -1,0 +1,12 @@
+<root>
+    <object>
+        <name>ODJ1599</name>
+        <bndbox>    
+            <xmin>562</xmin>
+            <ymin>534</ymin>
+            <xmax>904</xmax>
+            <ymax>645</ymax>
+            <lp>ODJ1599</lp>
+        </bndbox>
+    </object>
+</root>

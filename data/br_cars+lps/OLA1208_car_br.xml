@@ -1,0 +1,12 @@
+<root>
+    <object>
+        <name>OLA1208</name>
+        <bndbox>    
+            <xmin>436</xmin>
+            <ymin>493</ymin>
+            <xmax>720</xmax>
+            <ymax>585</ymax>
+            <lp>OLA1208</lp>
+        </bndbox>
+    </object>
+</root>

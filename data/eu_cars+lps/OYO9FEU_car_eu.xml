@@ -1,0 +1,12 @@
+<root>
+    <object>
+        <name>OYO9FEU</name>
+        <bndbox>    
+            <xmin>229</xmin>
+            <ymin>474</ymin>
+            <xmax>412</xmax>
+            <ymax>516</ymax>
+            <lp>OYO9FEU</lp>
+        </bndbox>
+    </object>
+</root>

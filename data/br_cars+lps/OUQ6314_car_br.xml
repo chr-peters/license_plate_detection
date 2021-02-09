@@ -1,0 +1,12 @@
+<root>
+    <object>
+        <name>OUQ6314</name>
+        <bndbox>    
+            <xmin>495</xmin>
+            <ymin>498</ymin>
+            <xmax>709</xmax>
+            <ymax>567</ymax>
+            <lp>OUQ6314</lp>
+        </bndbox>
+    </object>
+</root>

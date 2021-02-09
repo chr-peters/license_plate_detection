@@ -1,0 +1,26 @@
+<annotation>
+	<folder>Bogdan</folder>
+	<filename>DSCF2376.JPG</filename>
+	<path>Z:\chowdhury\1_lpr_detection+ocr\ims++\ro\Bogdan\DSCF2376.JPG</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>2304</width>
+		<height>1728</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>G945</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>1099</xmin>
+			<ymin>817</ymin>
+			<xmax>1303</xmax>
+			<ymax>902</ymax>
+		</bndbox>
+	</object>
+</annotation>

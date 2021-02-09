@@ -1,0 +1,12 @@
+<root>
+    <object>
+        <name>JPQ9870</name>
+        <bndbox>    
+            <xmin>571</xmin>
+            <ymin>623</ymin>
+            <xmax>891</xmax>
+            <ymax>727</ymax>
+            <lp>JPQ9870</lp>
+        </bndbox>
+    </object>
+</root>

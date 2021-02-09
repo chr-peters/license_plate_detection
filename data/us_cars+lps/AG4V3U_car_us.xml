@@ -1,0 +1,12 @@
+<root>
+                        <object>
+                            <name>AG4V3U</name>
+                            <bndbox>    
+                                <xmin>469</xmin>
+                                <ymin>351</ymin>
+                                <xmax>583</xmax>
+                                <ymax>408</ymax>
+                                <lp>AG4V3U</lp>
+                            </bndbox>
+                        </object>
+                     </root>

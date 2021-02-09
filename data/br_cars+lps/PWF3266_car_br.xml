@@ -1,0 +1,12 @@
+<root>
+    <object>
+        <name>PWF3266</name>
+        <bndbox>    
+            <xmin>437</xmin>
+            <ymin>748</ymin>
+            <xmax>732</xmax>
+            <ymax>843</ymax>
+            <lp>PWF3266</lp>
+        </bndbox>
+    </object>
+</root>

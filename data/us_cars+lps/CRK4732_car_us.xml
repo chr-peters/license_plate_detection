@@ -1,0 +1,12 @@
+<root>
+                        <object>
+                            <name>CRK4732</name>
+                            <bndbox>    
+                                <xmin>975</xmin>
+                                <ymin>408</ymin>
+                                <xmax>1118</xmax>
+                                <ymax>479</ymax>
+                                <lp>CRK4732</lp>
+                            </bndbox>
+                        </object>
+                     </root>

@@ -1,0 +1,12 @@
+<root>
+                        <object>
+                            <name>5VDA555</name>
+                            <bndbox>    
+                                <xmin>1010</xmin>
+                                <ymin>337</ymin>
+                                <xmax>1104</xmax>
+                                <ymax>384</ymax>
+                                <lp>5VDA555</lp>
+                            </bndbox>
+                        </object>
+                     </root>

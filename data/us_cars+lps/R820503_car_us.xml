@@ -1,0 +1,12 @@
+<root>
+                        <object>
+                            <name>R820503</name>
+                            <bndbox>    
+                                <xmin>666</xmin>
+                                <ymin>125</ymin>
+                                <xmax>724</xmax>
+                                <ymax>154</ymax>
+                                <lp>R820503</lp>
+                            </bndbox>
+                        </object>
+                     </root>

@@ -1,0 +1,12 @@
+<root>
+                        <object>
+                            <name>WXW835</name>
+                            <bndbox>    
+                                <xmin>136</xmin>
+                                <ymin>431</ymin>
+                                <xmax>230</xmax>
+                                <ymax>478</ymax>
+                                <lp>WXW835</lp>
+                            </bndbox>
+                        </object>
+                     </root>

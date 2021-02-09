@@ -1,0 +1,12 @@
+<root>
+                        <object>
+                            <name>SL7C6S</name>
+                            <bndbox>    
+                                <xmin>428</xmin>
+                                <ymin>207</ymin>
+                                <xmax>486</xmax>
+                                <ymax>236</ymax>
+                                <lp>SL7C6S</lp>
+                            </bndbox>
+                        </object>
+                     </root>

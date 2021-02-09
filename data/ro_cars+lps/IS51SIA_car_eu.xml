@@ -1,0 +1,26 @@
+<annotation>
+	<folder>Bogdan</folder>
+	<filename>DSCF2357.JPG</filename>
+	<path>Z:\chowdhury\1_lpr_detection+ocr\ims++\ro\Bogdan\DSCF2357.JPG</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>2304</width>
+		<height>1728</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>IS51SIA</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>1026</xmin>
+			<ymin>807</ymin>
+			<xmax>1219</xmax>
+			<ymax>856</ymax>
+		</bndbox>
+	</object>
+</annotation>

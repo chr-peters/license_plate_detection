@@ -1,0 +1,12 @@
+<root>
+                        <object>
+                            <name>CEMENT0</name>
+                            <bndbox>    
+                                <xmin>709</xmin>
+                                <ymin>193</ymin>
+                                <xmax>761</xmax>
+                                <ymax>219</ymax>
+                                <lp>CEMENT0</lp>
+                            </bndbox>
+                        </object>
+                     </root>

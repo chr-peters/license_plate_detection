@@ -1,0 +1,12 @@
+<root>
+                        <object>
+                            <name>5RIN962</name>
+                            <bndbox>    
+                                <xmin>526</xmin>
+                                <ymin>97</ymin>
+                                <xmax>605</xmax>
+                                <ymax>136</ymax>
+                                <lp>5RIN962</lp>
+                            </bndbox>
+                        </object>
+                     </root>

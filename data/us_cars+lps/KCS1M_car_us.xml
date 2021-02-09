@@ -1,0 +1,12 @@
+<root>
+                        <object>
+                            <name>KCS1M</name>
+                            <bndbox>    
+                                <xmin>137</xmin>
+                                <ymin>184</ymin>
+                                <xmax>258</xmax>
+                                <ymax>244</ymax>
+                                <lp>KCS1M</lp>
+                            </bndbox>
+                        </object>
+                     </root>

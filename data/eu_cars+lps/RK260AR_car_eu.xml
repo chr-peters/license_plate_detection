@@ -1,0 +1,12 @@
+<root>
+    <object>
+        <name>RK260AR</name>
+        <bndbox>    
+            <xmin>313</xmin>
+            <ymin>225</ymin>
+            <xmax>409</xmax>
+            <ymax>247</ymax>
+            <lp>RK260AR</lp>
+        </bndbox>
+    </object>
+</root>

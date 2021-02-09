@@ -1,0 +1,12 @@
+<root>
+    <object>
+        <name>OUG6157</name>
+        <bndbox>    
+            <xmin>614</xmin>
+            <ymin>551</ymin>
+            <xmax>831</xmax>
+            <ymax>621</ymax>
+            <lp>OUG6157</lp>
+        </bndbox>
+    </object>
+</root>

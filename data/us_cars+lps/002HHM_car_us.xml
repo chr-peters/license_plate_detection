@@ -1,0 +1,12 @@
+<root>
+                        <object>
+                            <name>002HHM</name>
+                            <bndbox>    
+                                <xmin>350</xmin>
+                                <ymin>360</ymin>
+                                <xmax>437</xmax>
+                                <ymax>403</ymax>
+                                <lp>002HHM</lp>
+                            </bndbox>
+                        </object>
+                     </root>

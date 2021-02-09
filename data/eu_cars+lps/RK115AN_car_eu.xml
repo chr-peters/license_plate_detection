@@ -1,0 +1,12 @@
+<root>
+    <object>
+        <name>RK115AN</name>
+        <bndbox>    
+            <xmin>234</xmin>
+            <ymin>181</ymin>
+            <xmax>368</xmax>
+            <ymax>211</ymax>
+            <lp>RK115AN</lp>
+        </bndbox>
+    </object>
+</root>

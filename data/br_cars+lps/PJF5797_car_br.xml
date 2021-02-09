@@ -1,0 +1,12 @@
+<root>
+    <object>
+        <name>PJF5797</name>
+        <bndbox>    
+            <xmin>530</xmin>
+            <ymin>642</ymin>
+            <xmax>765</xmax>
+            <ymax>718</ymax>
+            <lp>PJF5797</lp>
+        </bndbox>
+    </object>
+</root>

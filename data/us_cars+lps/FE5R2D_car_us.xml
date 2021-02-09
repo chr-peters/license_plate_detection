@@ -1,0 +1,12 @@
+<root>
+                        <object>
+                            <name>FE5R2D</name>
+                            <bndbox>    
+                                <xmin>488</xmin>
+                                <ymin>593</ymin>
+                                <xmax>562</xmax>
+                                <ymax>630</ymax>
+                                <lp>FE5R2D</lp>
+                            </bndbox>
+                        </object>
+                     </root>

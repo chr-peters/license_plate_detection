@@ -1,0 +1,26 @@
+<annotation>
+	<folder>ro_cars+lps</folder>
+	<filename>IS11AVX_car_eu.jpg</filename>
+	<path>D:\2_lehre\2_lab_object_detection\2020\Dataset\public\1_cars\ro_cars+lps\IS11AVX_car_eu.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>2304</width>
+		<height>1728</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>IS11AVX</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>956</xmin>
+			<ymin>1031</ymin>
+			<xmax>1200</xmax>
+			<ymax>1105</ymax>
+		</bndbox>
+	</object>
+</annotation>

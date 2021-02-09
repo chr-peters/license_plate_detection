@@ -1,0 +1,12 @@
+<root>
+    <object>
+        <name>JGZ3298</name>
+        <bndbox>    
+            <xmin>215</xmin>
+            <ymin>340</ymin>
+            <xmax>1022</xmax>
+            <ymax>602</ymax>
+            <lp>JGZ3298</lp>
+        </bndbox>
+    </object>
+</root>
