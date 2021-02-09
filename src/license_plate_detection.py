@@ -23,7 +23,7 @@ from license_plate_extraction.visualization_tools import show_image
 @click.argument("path", type=click.Path(exists=True, resolve_path=True))
 def main(visualize, path):
     """
-    Print the license plate of a car detected in an image.
+    Print the license plate and it's bounding box of a car detected in an image.
 
     PATH refers to the location of a JPEG image or a directory of JPEG images.
     If PATH is a directory, a file will be created that contains all the predicted license plates.
@@ -32,7 +32,8 @@ def main(visualize, path):
 
     if path.is_file():
         bounding_box, prediction = make_prediction(path)
-        click.echo(prediction)
+        click.echo(f"Bounding box: {bounding_box}")
+        click.echo(f"Predicted plate number: {prediction}")
 
         if visualize:
             image = read_image_as_tensor(path)
@@ -48,7 +49,7 @@ def main(visualize, path):
             cur_bounding_box, cur_prediction = make_prediction(cur_image_path)
 
             cur_image_name = cur_image_path.stem
-            print(f"{cur_image_name}:{cur_prediction}")
+            click.echo(f"{cur_image_name}:{cur_prediction}")
     else:
         click.echo("PATH must be either a file or a directory!", err="True")
 
