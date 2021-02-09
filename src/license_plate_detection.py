@@ -7,7 +7,6 @@ import click
 from pathlib import Path
 from prediction_pipeline import make_prediction
 from license_plate_extraction.data_reader import read_image_as_tensor
-from license_plate_extraction.preprocessing import bounding_box_in_pixel
 from license_plate_extraction.visualization_tools import show_image
 
 
@@ -34,13 +33,9 @@ def main(visualize, path):
 
         if visualize:
             image = read_image_as_tensor(path)
-            bounding_box_pixel = bounding_box_in_pixel(
-                bounding_box, img_height=image.shape[0], img_width=image.shape[1]
-            )
-
             show_image(
                 image,
-                bounding_box_pixel,
+                bounding_box,
                 prediction,
             )
 
