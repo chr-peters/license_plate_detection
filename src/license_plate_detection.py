@@ -6,7 +6,10 @@ os.environ["TF_CPP_MIN_LOG_LEVEL"] = "3"
 import click
 from pathlib import Path
 from prediction_pipeline import make_prediction
-from license_plate_extraction.data_reader import read_image_as_tensor
+from license_plate_extraction.data_reader import (
+    read_image_as_tensor,
+    get_image_paths_from_directory,
+)
 from license_plate_extraction.visualization_tools import show_image
 
 
@@ -40,7 +43,12 @@ def main(visualize, path):
             )
 
     elif path.is_dir():
-        pass
+        image_path_list = get_image_paths_from_directory(path)
+        for cur_image_path in image_path_list:
+            cur_bounding_box, cur_prediction = make_prediction(cur_image_path)
+
+            cur_image_name = cur_image_path.stem
+            print(f"{cur_image_name}:{cur_prediction}")
     else:
         click.echo("PATH must be either a file or a directory!", err="True")
 
