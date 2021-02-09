@@ -45,8 +45,13 @@ def read_image_as_tensor(path: Path) -> tf.Tensor:
     return img_tensor
 
 
-def get_image_paths_from_directory(directory_path: Path) -> List[Path]:
-    image_paths = list(directory_path.glob("*_car_*.jpg"))
+def get_image_paths_from_directory(
+    directory_path: Path, contains="_car_"
+) -> List[Path]:
+    if contains is None or contains == "":
+        image_paths = list(directory_path.glob("*.jpg"))
+    else:
+        image_paths = list(directory_path.glob(f"*{contains}*.jpg"))
 
     return image_paths
 
