@@ -54,7 +54,7 @@ def main(visualize, path, outfile):
             )
             return
 
-        image_path_list = get_image_paths_from_directory(path, contains="")
+        image_path_list = get_image_paths_from_directory(path)
         for cur_image_path in image_path_list:
             cur_bounding_box, cur_prediction = make_prediction(cur_image_path)
 

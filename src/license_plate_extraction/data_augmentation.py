@@ -88,10 +88,10 @@ if __name__ == "__main__":
     images_directory_us = settings.DATA_DIR / "us_cars+lps"
 
     image_path_list = [
-        #*get_image_paths_from_directory(images_directory_br),
-        #*get_image_paths_from_directory(images_directory_eu),
-        #*get_image_paths_from_directory(images_directory_ro),
-        *get_image_paths_from_directory(images_directory_us),
+        # *get_image_paths_from_directory(images_directory_br, contains="_car_"),
+        # *get_image_paths_from_directory(images_directory_eu, contains="_car_"),
+        # *get_image_paths_from_directory(images_directory_ro, contains="_car_"),
+        *get_image_paths_from_directory(images_directory_us, contains="_car_"),
     ]
 
     TARGET_IMG_HEIGHT = 500
