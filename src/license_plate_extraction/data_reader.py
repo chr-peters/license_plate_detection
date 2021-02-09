@@ -105,9 +105,9 @@ def make_dataset_from_image_paths(
 
 
 if __name__ == "__main__":
-    images_directory = settings.DATA_DIR / "eu_cars+lps"
+    images_directory = settings.DATA_DIR / "cars_russia"
     # images_directory = settings.DATA_DIR / "us_cars+lps"
-    image_path_list = get_image_paths_from_directory(images_directory, contains="_car_")
+    image_path_list = get_image_paths_from_directory(images_directory)
 
     TARGET_IMG_HEIGHT = 500
     TARGET_IMG_WIDTH = 500
