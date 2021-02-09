@@ -49,7 +49,7 @@ def main(visualize, path, outfile):
     elif path.is_dir():
         if outfile is None:
             click.echo(
-                "Error: If PATH is a directory, OUTFILE must be specified! See license_plate_detection.py --help",
+                "Error: If PATH is a directory, OUTFILE must be specified! See 'license_plate_detection.py --help' for help.",
                 err=True,
             )
             return
