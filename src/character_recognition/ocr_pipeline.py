@@ -48,8 +48,8 @@ def ocr_pipeline(img, bounding_box):
         rect = cv2.rectangle(gray, (x, y), (x + w, y + h), (0, 255, 0), 2)
         roi = thresh[y - 5 : y + h + 5, x - 5 : x + w + 5]
         roi = cv2.bitwise_not(roi)
-        roi = cv2.medianBlur(roi, 5)        
         if type(roi) is not type(None):
+            roi = cv2.medianBlur(roi, 5)        
             text = pytesseract.image_to_string(
                 roi,
                 config="-c tessedit_char_whitelist=0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ --psm 8 --oem 3",
@@ -65,15 +65,15 @@ def ocr_pipeline(img, bounding_box):
 
 
 if __name__ == "__main__":
-    #ocr_pipeline(
-    #    cv2.imread(
-    #        "G:\Statistik\FallstudienII\Projekt2\Code\Daten\eu_cars+lps/BS47040_car_eu.jpg"
-    #    ),
-    #    (92 / 600, 201 / 387, (229 - 201) / 387, (214 - 92) / 600),
-    #)
     ocr_pipeline(
         cv2.imread(
-            "G:\Statistik\FallstudienII\Projekt2\Code\Daten\eu_cars+lps/BIMMIAN_car_eu.jpg"
+            "G:\Statistik\FallstudienII\Projekt2\Code\Daten\eu_cars+lps/BS47040_car_eu.jpg"
         ),
-        (104 / 711, 210 / 450, (609 - 104) / 711, (362 - 210) / 450),
+        (92 / 600, 201 / 387, (229 - 201) / 387, (214 - 92) / 600),
     )
+    # ocr_pipeline(
+    #     cv2.imread(
+    #         "G:\Statistik\FallstudienII\Projekt2\Code\Daten\eu_cars+lps/BIMMIAN_car_eu.jpg"
+    #     ),
+    #     (104 / 711, 210 / 450, (609 - 104) / 711, (362 - 210) / 450),
+    # )
