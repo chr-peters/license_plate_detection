@@ -6,7 +6,7 @@ import settings
 import visualization_tools
 
 
-PREDICTION_MODEL_PATH = settings.MODELS_DIR / "test_01.tf"
+PREDICTION_MODEL_PATH = settings.MODELS_DIR / "test_02.tf"
 prediction_model = tf.keras.models.load_model(PREDICTION_MODEL_PATH)
 
 
