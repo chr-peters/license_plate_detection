@@ -47,8 +47,8 @@ def ocr_pipeline(img, bounding_box):
             continue  # 25
         rect = cv2.rectangle(gray, (x, y), (x + w, y + h), (0, 255, 0), 2)
         roi = thresh[y - 5 : y + h + 5, x - 5 : x + w + 5]
+        roi = cv2.bitwise_not(roi)
         if type(roi) is not type(None):
-            roi = cv2.bitwise_not(roi)
             roi = cv2.medianBlur(roi, 5)        
             text = pytesseract.image_to_string(
                 roi,
