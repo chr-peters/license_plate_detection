@@ -1,7 +1,6 @@
 import cv2
 import numpy as np
 import pytesseract
-from Levenshtein import distance as levenshtein_distance
 import pylev
 import statistics
 
@@ -74,7 +73,7 @@ def ocr_one(img, schwellenwert, character, ausgabe, ausgabe_thresh, name, tes):
     else:
         plate_num = pytesseract.image_to_string(opening, config='-c tessedit_char_whitelist=0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ --psm 7 --oem 3')
     # Levenshtein-Distanz:
-    dist = levenshtein_distance(character, plate_num)
+    dist = pylev.levenshtein(character, plate_num)
     
     return dist, plate_num
 
