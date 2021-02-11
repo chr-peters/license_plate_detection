@@ -3,6 +3,12 @@ import numpy as np
 import pytesseract
 from pathlib import Path
 
+# from license_plate_extraction.prediction import predict_bounding_box
+# from license_plate_extraction import data_reader
+# from license_plate_extraction import settings
+# from license_plate_extraction import preprocessing
+# from license_plate_extraction import visualization_tools
+
 ###############################################################################
 
 
@@ -32,6 +38,8 @@ def ocr_pipeline(img, bounding_box):
         opening, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE
     )
     sorted_contours = sorted(contours, key=lambda ctr: cv2.boundingRect(ctr)[0])
+    
+    img_c = cv2.drawContours(gray, sorted_contours, -1, (0,255,0), 3)
 
     plate_num = ""
     # gehe ueber Konturen und lese nur solche aus, die Zeichen sind:
@@ -47,15 +55,16 @@ def ocr_pipeline(img, bounding_box):
             continue  # 25
         rect = cv2.rectangle(gray, (x, y), (x + w, y + h), (0, 255, 0), 2)
         roi = thresh[y - 5 : y + h + 5, x - 5 : x + w + 5]
+        if roi.size == 0:
+            roi = thresh[y - 2 : y + h + 2, x - 2 : x + w + 2]
+        if roi.size == 0:
+            roi = thresh[y : y + h, x : x + w]
         roi = cv2.bitwise_not(roi)
-        if type(roi) is not type(None):
-            roi = cv2.medianBlur(roi, 5)        
-            text = pytesseract.image_to_string(
-                roi,
-                config="-c tessedit_char_whitelist=0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ --psm 8 --oem 3",
-            )
-        else:
-            continue
+        roi = cv2.medianBlur(roi, 5)        
+        text = pytesseract.image_to_string(
+            roi,
+            config="-c tessedit_char_whitelist=0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ --psm 8 --oem 3",
+        )
         plate_num += text
 
     plate_num = plate_num.splitlines()
@@ -65,15 +74,47 @@ def ocr_pipeline(img, bounding_box):
 
 
 if __name__ == "__main__":
-    ocr_pipeline(
-        cv2.imread(
-            "G:\Statistik\FallstudienII\Projekt2\Code\Daten\eu_cars+lps/BS47040_car_eu.jpg"
-        ),
-        (92 / 600, 201 / 387, (229 - 201) / 387, (214 - 92) / 600),
-    )
     # ocr_pipeline(
     #     cv2.imread(
-    #         "G:\Statistik\FallstudienII\Projekt2\Code\Daten\eu_cars+lps/BIMMIAN_car_eu.jpg"
+    #         "G:\Statistik\FallstudienII\Projekt2\Code\Daten\eu_cars+lps/BS47040_car_eu.jpg"
     #     ),
-    #     (104 / 711, 210 / 450, (609 - 104) / 711, (362 - 210) / 450),
+    #     (92 / 600, 201 / 387, (229 - 201) / 387, (214 - 92) / 600),
     # )
+    ocr_pipeline(
+        cv2.imread(
+            "G:\Statistik\FallstudienII\Projekt2\Code\Daten\eu_cars+lps/W053011_car_eu.jpg"
+        ),
+        (391 / 600, 202 / 425, (522 - 391) / 600, (232 - 202) / 425),
+    )
+
+# if __name__ == "__main__":
+#     image_dir_eu = settings.DATA_DIR / "eu_cars+lps"
+#     image_dir_no_labels = settings.DATA_DIR / "no_labels"
+
+#     # image_paths = data_reader.get_image_paths_from_directory(
+#     #     image_dir_eu, contains="_car_"
+#     # )
+#     image_paths = data_reader.get_image_paths_from_directory(image_dir_eu)
+
+#     # test_path = image_dir_eu / "BS47040_car_eu.jpg"
+#     # make_prediction(test_path)
+
+#     for cur_path in image_paths:
+#         image_tensor = data_reader.read_image_as_tensor(cur_path)
+#         predicted_bounding_box = predict_bounding_box(image_tensor)
+#         image_numpy = image_tensor.numpy()
+#         cur_prediction = ocr_pipeline(image_numpy, predicted_bounding_box)
+#         print(cur_prediction)
+
+#         cur_image_tensor = data_reader.read_image_as_tensor(cur_path)
+#         visualization_tools.show_image(
+#             img = cur_image_tensor, plate_text = cur_prediction
+#         )
+        
+        
+        
+        
+        
+        
+        
+        
