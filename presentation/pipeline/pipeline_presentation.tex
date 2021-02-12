@@ -1,0 +1,51 @@
+\documentclass[10pt]{beamer}
+
+\usetheme[subsectionpage=progressbar]{metropolis}
+\usepackage{appendixnumberbeamer}
+
+\usepackage{ucs}
+\usepackage[utf8x]{inputenc}
+\usepackage[ngerman]{babel}
+
+\usepackage{booktabs}
+\usepackage[scale=2]{ccicons}
+
+\usepackage{pgfplots}
+\usepgfplotslibrary{dateplot}
+
+\usepackage{xspace}
+\usepackage{dsfont}
+\usepackage{graphicx}
+\newcommand{\themename}{\textbf{\textsc{metropolis}}\xspace}
+
+\title{Nummernschilderkennung mit Python}
+% \subtitle{Machine Learning in Produktion und Logistik}
+\date{18. Februar 2021}
+\author{Anne-Sophie Bollmann, Susanne Kl\"ocker, Pia von Kolken, Christian Peters}
+%\institute{TU Dortmund}
+%\titlegraphic{\hfill\includegraphics[height=1.5cm]{logo.pdf}}
+
+\begin{document}
+
+\maketitle
+
+\input{sections/pipeline}
+
+\input{sections/bounding_box_regression}
+
+\input{sections/ocr}
+
+\input{sections/learnings}
+
+\input{sections/evaluator_results}
+
+\appendix
+
+\begin{frame}[allowframebreaks]{Literatur}
+  \nocite{*}
+  \bibliography{literature}
+  \bibliographystyle{abbrv}
+
+\end{frame}
+
+\end{document}
