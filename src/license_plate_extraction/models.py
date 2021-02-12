@@ -52,6 +52,7 @@ def tiny_yolo_inspired(input_height, input_width, num_channels):
 
     return model
 
+
 def test_model(input_height, input_width, num_channels):
     model = Sequential(
         [
@@ -60,19 +61,19 @@ def test_model(input_height, input_width, num_channels):
                 1.0 / 255,
             ),
             layers.Conv2D(16, 3, padding="same", activation="relu"),
-            layers.MaxPooling2D((2,2)),
+            layers.MaxPooling2D((2, 2)),
             layers.Conv2D(32, 3, padding="same", activation="relu"),
-            layers.MaxPooling2D((2,2)),
+            layers.MaxPooling2D((2, 2)),
             layers.Conv2D(64, 3, padding="same", activation="relu"),
-            layers.MaxPooling2D((2,2)),
+            layers.MaxPooling2D((2, 2)),
             layers.Conv2D(128, 3, padding="same", activation="relu"),
-            layers.MaxPooling2D((2,2)),
+            layers.MaxPooling2D((2, 2)),
             layers.Conv2D(256, 3, padding="same", activation="relu"),
-            layers.MaxPooling2D((2,2)),
+            layers.MaxPooling2D((2, 2)),
             layers.Conv2D(64, 3, padding="same", activation="relu"),
-            layers.MaxPooling2D((2,2)),
+            layers.MaxPooling2D((2, 2)),
             layers.Conv2D(32, 3, padding="same", activation="relu"),
-            layers.MaxPooling2D((2,2)),
+            layers.MaxPooling2D((2, 2)),
             layers.Flatten(),
             layers.Dropout(0.2),
             layers.Dense(4, activation="sigmoid", use_bias=False),
@@ -80,6 +81,7 @@ def test_model(input_height, input_width, num_channels):
     )
 
     return model
+
 
 def test_model2(input_height, input_width, num_channels):
     model = Sequential(
@@ -91,7 +93,7 @@ def test_model2(input_height, input_width, num_channels):
             layers.AveragePooling2D(6, 3),
             layers.Conv2D(64, 3, padding="same", activation="relu"),
             layers.Conv2D(64, 3, padding="same", activation="relu"),
-            layers.MaxPooling2D(2,2),
+            layers.MaxPooling2D(2, 2),
             layers.Dropout(0.2),
             layers.Flatten(),
             layers.Dense(128, activation="relu"),
@@ -102,8 +104,27 @@ def test_model2(input_height, input_width, num_channels):
     return model
 
 
+def efficientnetb2_pretrained(input_height, input_width, num_channels):
+    base_model = tf.keras.applications.EfficientNetB2(
+        include_top=False,
+        weights="imagenet",
+        input_shape=(input_height, input_width, num_channels),
+    )
+    base_model.trainable = False
+
+    inputs = Input(shape=(input_height, input_width, num_channels))
+    x = tf.keras.applications.efficientnet.preprocess_input(inputs)
+    x = base_model(x)
+    x = layers.Flatten()(x)
+    x = layers.Dropout(0.1)(x)
+    outputs = layers.Dense(4, activation="sigmoid")(x)
+    model = tf.keras.Model(inputs, outputs)
+
+    return model
+
 
 if __name__ == "__main__":
-    model = test_model(448, 448, 3)
+    # model = test_model(448, 448, 3)
+    model = efficientnetb2_pretrained(260, 260, 3)
 
-    print(model.summary())
+    model.summary()
