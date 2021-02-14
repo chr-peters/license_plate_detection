@@ -2,7 +2,11 @@ import tensorflow as tf
 import settings
 from data_reader import get_image_paths_from_directory, make_dataset_from_image_paths
 from visualization_tools import show_image
-from preprocessing import bounding_box_in_pixel
+from preprocessing import (
+    bounding_box_in_percent,
+    bounding_box_in_pixel,
+    scale_bounding_box,
+)
 import numpy as np
 
 
@@ -57,6 +61,62 @@ def brightness_fun(cur_image, cur_bounding_box):
     return (np.array(img_list), np.array(bounding_box_list))
 
 
+def random_crop_fun(cur_image, cur_bounding_box):
+    img_list = []
+    bounding_box_list = []
+
+    # bounding box is in percent, but we need pixel values
+    img_height = cur_image.shape[0]
+    img_width = cur_image.shape[1]
+    x_min, y_min, width, height = bounding_box_in_pixel(
+        cur_bounding_box, img_height, img_width
+    )
+
+    rng = np.random.default_rng()
+    random_offset_height = rng.integers(low=0, high=y_min + 1, size=1)[0]
+    random_offset_width = rng.integers(low=0, high=x_min + 1, size=1)[0]
+    random_target_height = rng.integers(
+        low=height + (y_min - random_offset_height),
+        high=img_height - random_offset_height + 1,
+        size=1,
+    )[0]
+    random_target_width = rng.integers(
+        low=width + (x_min - random_offset_width),
+        high=img_width - random_offset_width + 1,
+        size=1,
+    )[0]
+
+    cropped_image = tf.image.crop_to_bounding_box(
+        cur_image,
+        random_offset_height,
+        random_offset_width,
+        random_target_height,
+        random_target_width,
+    )
+    cropped_image = tf.image.resize(
+        cropped_image, size=(img_height, img_width), antialias=True
+    )
+    img_list.append(cropped_image)
+
+    # update bounding box
+    x_min_new = x_min - random_offset_width
+    y_min_new = y_min - random_offset_height
+    width_new = width
+    height_new = height
+    bounding_box_new = np.array([x_min_new, y_min_new, width_new, height_new])
+    bounding_box_new = scale_bounding_box(
+        bounding_box_new,
+        img_height=random_target_height,
+        img_width=random_target_width,
+        target_img_height=img_height,
+        target_img_width=img_width,
+    )
+    bounding_box_new = bounding_box_in_percent(bounding_box_new, img_height, img_width)
+    bounding_box_list.append(bounding_box_new)
+
+    return (np.array(img_list), np.array(bounding_box_list))
+
+
 def _augment_dataset(dataset, augment_fun):
     dataset = dataset.map(
         lambda x, y: tf.py_function(
@@ -77,8 +137,12 @@ def add_brightness(dataset: tf.data.Dataset) -> tf.data.Dataset:
     return _augment_dataset(dataset, brightness_fun)
 
 
-def horizontal_flip(dataset: tf.data.Dataset):
+def horizontal_flip(dataset: tf.data.Dataset) -> tf.data.Dataset:
     return _augment_dataset(dataset, flip_fun)
+
+
+def random_crop(dataset: tf.data.Dataset) -> tf.data.Dataset:
+    return _augment_dataset(dataset, random_crop_fun)
 
 
 if __name__ == "__main__":
@@ -89,9 +153,9 @@ if __name__ == "__main__":
 
     image_path_list = [
         # *get_image_paths_from_directory(images_directory_br, contains="_car_"),
-        # *get_image_paths_from_directory(images_directory_eu, contains="_car_"),
+        *get_image_paths_from_directory(images_directory_eu, contains="_car_"),
         # *get_image_paths_from_directory(images_directory_ro, contains="_car_"),
-        *get_image_paths_from_directory(images_directory_us, contains="_car_"),
+        # *get_image_paths_from_directory(images_directory_us, contains="_car_"),
     ]
 
     TARGET_IMG_HEIGHT = 500
@@ -106,9 +170,10 @@ if __name__ == "__main__":
     print(f"Num images original: {len(dataset)}")
 
     dataset_augmented = dataset
-    dataset_augmented = horizontal_flip(dataset_augmented)
-    dataset_augmented = add_brightness(dataset_augmented)
-    dataset_augmented = add_contrast(dataset_augmented)
+    dataset_augmented = random_crop(dataset_augmented)
+    # dataset_augmented = horizontal_flip(dataset_augmented)
+    # dataset_augmented = add_brightness(dataset_augmented)
+    # dataset_augmented = add_contrast(dataset_augmented)
 
     print(f"Num images augmented: {len(list(dataset_augmented.as_numpy_iterator()))}")
 
@@ -120,4 +185,5 @@ if __name__ == "__main__":
             cur_bounding_box, TARGET_IMG_HEIGHT, TARGET_IMG_WIDTH
         )
 
+        print(cur_bounding_box_pixel)
         show_image(cur_image.astype(int), cur_bounding_box_pixel)
