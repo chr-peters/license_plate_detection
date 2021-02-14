@@ -1,7 +1,7 @@
 # Automatic License Plate Detection in Python
 *Developed by Anne-Sophie Bollmann, Susanne Klöcker, Pia von Kolken and Christian Peters*
 
-We used Tensorflow, OpenCV and Tesseract to build an automatic license plate detection system in python.
+We used [Tensorflow](https://www.tensorflow.org/), [OpenCV](https://opencv.org/) and [Tesseract](https://tesseract-ocr.github.io/) to build an automatic license plate detection system in Python.
 
 ## Usage
 
@@ -35,11 +35,14 @@ This project requires python 3.8.7.
     pip install -r requirements.txt
     ```
 
+Congratulations! 🎉🎉 🎉  
+You are now ready to predict license plates using the script `license_plate_detection.py` inside of the `src` directory.
+
 ### Notes on Tesseract
 
-This project conatins a full Tesseract installation for Windows 10.
+This project contains a full Tesseract installation for Windows 10.
 If you are using Linux or Mac, you have to install Tesseract yourself and
-set the following line in the file `src/character_recognition/ocr_pipeline.py`:
+update the following line in the file `src/character_recognition/ocr_pipeline.py`:
 ```python
 pytesseract.pytesseract.tesseract_cmd = "[path to tesseract.exe]"
 ```
