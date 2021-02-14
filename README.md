@@ -16,7 +16,7 @@ You will see something like this:
 
 ## Installation
 
-This project requires python 3.8.7.
+This project requires Python 3.8.7.
 
 1. Clone this repository to your local machine:
     ```sh
