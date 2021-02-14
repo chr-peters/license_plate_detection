@@ -44,5 +44,5 @@ This project contains a full Tesseract installation for Windows 10.
 If you are using Linux or Mac, you have to install Tesseract yourself and
 update the following line in the file `src/character_recognition/ocr_pipeline.py`:
 ```python
-pytesseract.pytesseract.tesseract_cmd = "[path to tesseract.exe]"
+pytesseract.pytesseract.tesseract_cmd = "[path to tesseract executable]"
 ```
