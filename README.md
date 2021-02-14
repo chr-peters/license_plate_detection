@@ -11,6 +11,7 @@ python license_plate_detection.py --visualize [path to .jpg image]
 ```
 
 You will see something like this:
+
 ![The license plate of a car has been successfully recognized.](https://raw.githubusercontent.com/cxan96/license_plate_detection/main/demo.png)
 
 ## Installation
