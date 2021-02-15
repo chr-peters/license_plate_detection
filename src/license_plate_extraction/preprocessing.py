@@ -1,4 +1,5 @@
 import numpy as np
+from visualization_tools import show_image
 
 
 def bounding_box_in_percent(bounding_box, img_height, img_width):
@@ -38,3 +39,26 @@ def scale_bounding_box(
             height * target_img_height,
         ]
     )
+
+
+def bounding_box_to_binary_mask(bounding_box_pixel: np.ndarray, img_height, img_width):
+    """
+    Converts a bounding box to a binary mask of shape [img_height, img_width],
+    where 1s encode inside box and 0s encode outside box.
+    """
+    x_min, y_min, width, height = bounding_box_pixel.astype(int)
+
+    mask = np.zeros(shape=(img_height, img_width))
+    mask[y_min : y_min + height, x_min : x_min + width] = 1
+
+    return mask
+
+
+if __name__ == "__main__":
+    img_height = 400
+    img_width = 600
+
+    test_bounding_box = np.array([100, 150, 300, 200])
+    mask = bounding_box_to_binary_mask(test_bounding_box, img_height, img_width)
+
+    show_image(mask)
