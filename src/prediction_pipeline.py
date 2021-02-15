@@ -30,11 +30,13 @@ def make_prediction(image_path: Path) -> str:
 if __name__ == "__main__":
     image_dir_eu = settings.DATA_DIR / "eu_cars+lps"
     image_dir_no_labels = settings.DATA_DIR / "no_labels"
+    # img_dir_russia = settings.DATA_DIR / "cars_russia"
 
     # image_paths = data_reader.get_image_paths_from_directory(
     #     image_dir_eu, contains="_car_"
     # )
     image_paths = data_reader.get_image_paths_from_directory(image_dir_no_labels)
+    # image_paths = data_reader.get_image_paths_from_directory(img_dir_russia)
 
     # test_path = image_dir_eu / "BS47040_car_eu.jpg"
     # make_prediction(test_path)
