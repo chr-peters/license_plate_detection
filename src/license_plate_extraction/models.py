@@ -123,6 +123,31 @@ def efficientnetb2_pretrained(input_height, input_width, num_channels):
     return model
 
 
+def tiny_xception(input_height, input_width, num_channels):
+    xception = tf.keras.applications.Xception(
+        include_top=False,
+        weights="imagenet",
+        input_shape=(input_height, input_width, num_channels),
+    )
+    xception.trainable = False
+
+    inputs = tf.keras.Input(shape=(input_height, input_width, num_channels))
+    x = tf.keras.applications.xception.preprocess_input(inputs)
+    x = xception(x)
+
+    x = tf.keras.layers.Dropout(0.5)(x)
+    x = tf.keras.layers.Conv2D(256, 2, padding="same", activation="relu")(x)
+    x = tf.keras.layers.MaxPool2D()(x)
+    x = tf.keras.layers.Conv2D(64, 2, padding="same", activation="relu")(x)
+    x = tf.keras.layers.Conv2D(32, 2, padding="same", activation="relu")(x)
+    x = tf.keras.layers.Flatten()(x)
+    x = tf.keras.layers.Dropout(0.2)(x)
+
+    outputs = tf.keras.layers.Dense(4, activation="sigmoid")(x)
+
+    return tf.keras.Model(inputs, outputs)
+
+
 if __name__ == "__main__":
     # model = test_model(448, 448, 3)
     model = efficientnetb2_pretrained(260, 260, 3)
