@@ -8,3 +8,4 @@ pytesseract
 pylev
 PyQt5
 click
+pandas
