@@ -6,7 +6,7 @@ import settings
 import visualization_tools
 
 
-PREDICTION_MODEL_PATH = settings.MODELS_DIR / "tiny_with_cropping.tf"
+PREDICTION_MODEL_PATH = settings.MODELS_DIR / "tiny_cropping_no_russia.tf"
 prediction_model = tf.keras.models.load_model(PREDICTION_MODEL_PATH)
 
 
