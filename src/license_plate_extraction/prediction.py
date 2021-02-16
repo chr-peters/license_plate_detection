@@ -34,7 +34,7 @@ def predict_bounding_box(image_tensor: tf.Tensor) -> np.ndarray:
     return prediction.numpy()
 
 
-PREDICTION_MODEL_PATH_MASK = settings.MODELS_DIR / "first_mask_model.tf"
+PREDICTION_MODEL_PATH_MASK = settings.MODELS_DIR / "masks_full_data.tf"
 prediction_model_mask = tf.keras.models.load_model(PREDICTION_MODEL_PATH_MASK)
 
 

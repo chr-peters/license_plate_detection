@@ -55,7 +55,7 @@ def bounding_box_to_binary_mask(bounding_box_pixel: np.ndarray, img_height, img_
     return mask
 
 
-def mask_to_bounding_box(mask: np.ndarray, threshold_percent=0.1) -> np.ndarray:
+def mask_to_bounding_box(mask: np.ndarray, threshold_percent=0.5) -> np.ndarray:
     ret, thresh = cv2.threshold(
         (mask * 255).astype("uint8"), int(255 * threshold_percent), 255, 0
     )

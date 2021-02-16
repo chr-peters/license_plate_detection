@@ -33,12 +33,17 @@ def make_prediction(image_path: Path) -> str:
 
 if __name__ == "__main__":
     image_dir_eu = settings.DATA_DIR / "eu_cars+lps"
+    image_dir_eu_valid = settings.DATA_DIR / "validation_eu"
     image_dir_no_labels = settings.DATA_DIR / "no_labels"
-    # img_dir_russia = settings.DATA_DIR / "cars_russia"
+    img_dir_russia = settings.DATA_DIR / "cars_russia"
 
     # image_paths = data_reader.get_image_paths_from_directory(
     # image_dir_eu, contains="_car_"
     # )
+    # image_paths = data_reader.get_image_paths_from_directory(
+    #     image_dir_eu_valid, contains="_car_"
+    # )
+
     image_paths = data_reader.get_image_paths_from_directory(image_dir_no_labels)
     # image_paths = data_reader.get_image_paths_from_directory(img_dir_russia)
 
