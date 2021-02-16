@@ -108,7 +108,7 @@ def ocr_extraction(img_bound, x_start, y_start):
     for cnt in sorted_contours:
         x, y, w, h = cv2.boundingRect(cnt)
         height, width = gray.shape
-        if height / float(h) > 4:  # je nach Modell auf 3 setzen?
+        if height / float(h) > 3:
             continue
         ratio = h / float(w)
         if ratio < 1.2:
@@ -248,7 +248,23 @@ def ocr_validation(data_plate):
     if not final_frame.empty:
         final_frame = final_frame[final_frame["conf"] >= 40]
         final_frame = final_frame.sort_values(by=["x"])
-        final_frame.astype({"text": "string"}).dtypes
+
+        for i in range(len(final_frame)):
+            if i not in final_frame.index:
+                continue
+            curr_frame = final_frame[
+                (final_frame["x"] <= final_frame.x[i] + 1)
+                & (final_frame["x"] >= final_frame.x[i] - 1)
+            ]
+            if len(curr_frame) == 1:
+                continue
+            if len(curr_frame.text.unique()) == 1:
+                curr_frame = curr_frame.tail(1)
+            else:
+                curr_frame = curr_frame[
+                    curr_frame["conf"] != np.max(curr_frame["conf"])
+                ]
+            final_frame.drop(curr_frame.index, inplace=True)
 
         plate = ""
         for char in final_frame.text:
@@ -262,14 +278,18 @@ def ocr_validation(data_plate):
         return ""
 
 
+# x +- 1 gibts da doppelungen? falls ja, schmeiße die zeile raus, die kleiner conf hat
+
+cond = ()
+final_frame[final_frame[cond]]
 ###############################################################################
 
 if __name__ == "__main__":
     from pathlib import Path
 
-    data_dir = Path(__file__).parent.parent.parent / "data"
-    img = cv2.imread(str(data_dir / "validation_eu" / "SG47471_car_eu.jpg"))
-    bounding_box = (257 / 576, 233 / 432, (345 - 257) / 576, (253 - 233) / 432)
+    # data_dir = Path(__file__).parent.parent.parent / "data"
+    # img = cv2.imread(str(data_dir / "validation_eu" / "SG47471_car_eu.jpg"))
+    # bounding_box = (257 / 576, 233 / 432, (345 - 257) / 576, (253 - 233) / 432)
 
     methods = [
         "normal",
