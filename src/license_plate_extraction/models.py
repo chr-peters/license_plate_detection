@@ -148,8 +148,36 @@ def tiny_xception(input_height, input_width, num_channels):
     return tf.keras.Model(inputs, outputs)
 
 
+def simple_mask_predictor(input_height, input_width, num_channels):
+    model = tf.keras.Sequential(
+        [
+            tf.keras.Input(shape=(input_height, input_width, num_channels)),
+            tf.keras.layers.experimental.preprocessing.Rescaling(
+                1.0 / 255,
+            ),
+            tf.keras.layers.Conv2D(32, 3, padding="same", activation="relu"),
+            tf.keras.layers.MaxPool2D(4),
+            tf.keras.layers.Conv2D(64, 3, padding="same", activation="relu"),
+            tf.keras.layers.MaxPool2D(4),
+            tf.keras.layers.Conv2D(128, 3, padding="same", activation="relu"),
+            tf.keras.layers.UpSampling2D(),
+            tf.keras.layers.Conv2D(64, 3, padding="same", activation="relu"),
+            tf.keras.layers.UpSampling2D(),
+            tf.keras.layers.Conv2D(32, 3, padding="same", activation="relu"),
+            tf.keras.layers.UpSampling2D(),
+            tf.keras.layers.Conv2D(16, 3, padding="same", activation="relu"),
+            tf.keras.layers.UpSampling2D(),
+            tf.keras.layers.Conv2D(8, 3, padding="same", activation="relu"),
+            tf.keras.layers.Conv2D(1, 1, padding="same", activation="sigmoid"),
+        ]
+    )
+
+    return model
+
+
 if __name__ == "__main__":
     # model = test_model(448, 448, 3)
-    model = efficientnetb2_pretrained(260, 260, 3)
+    # model = efficientnetb2_pretrained(260, 260, 3)
+    model = simple_mask_predictor(400, 400, 3)
 
     model.summary()
