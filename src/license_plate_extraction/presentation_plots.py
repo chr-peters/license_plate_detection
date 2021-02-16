@@ -11,7 +11,8 @@ import settings
 
 if __name__ == "__main__":
     # first, show how an image is scaled to 400x400 (this is the neural net input)
-    image_path = settings.DATA_DIR / "eu_cars+lps" / "1T43213_car_eu.jpg"
+    # image_path = settings.DATA_DIR / "eu_cars+lps" / "1T43213_car_eu.jpg"
+    image_path = settings.DATA_DIR / "no_labels" / "audi.jpg"
 
     # read the image using tensorflow
     image_tensor = data_reader.read_image_as_tensor(image_path)
@@ -23,24 +24,24 @@ if __name__ == "__main__":
     show_image(image_tensor_resized.numpy().astype(int))
 
     # next, read the bounding box
-    bounding_box = data_reader.get_bounding_box_from_xml_path(
-        data_reader.get_bounding_box_xml_path_from_image_path(image_path)
-    )
+    # bounding_box = data_reader.get_bounding_box_from_xml_path(
+    #     data_reader.get_bounding_box_xml_path_from_image_path(image_path)
+    # )
 
-    # scale it first, so that it matches the 400x400 dimension
-    bounding_box_scaled = preprocessing.scale_bounding_box(
-        bounding_box,
-        img_height=image_tensor.shape[0],
-        img_width=image_tensor.shape[1],
-        target_img_height=400,
-        target_img_width=400,
-    )
+    # # scale it first, so that it matches the 400x400 dimension
+    # bounding_box_scaled = preprocessing.scale_bounding_box(
+    #     bounding_box,
+    #     img_height=image_tensor.shape[0],
+    #     img_width=image_tensor.shape[1],
+    #     target_img_height=400,
+    #     target_img_width=400,
+    # )
 
-    # get the binary mask and show it
-    bounding_box_mask = preprocessing.bounding_box_to_binary_mask(
-        bounding_box_scaled, img_height=400, img_width=400
-    )
-    show_image(bounding_box_mask)
+    # # get the binary mask and show it
+    # bounding_box_mask = preprocessing.bounding_box_to_binary_mask(
+    #     bounding_box_scaled, img_height=400, img_width=400
+    # )
+    # show_image(bounding_box_mask)
 
     # Now it's time to make a prediction.
     # To do so, we first load the model.

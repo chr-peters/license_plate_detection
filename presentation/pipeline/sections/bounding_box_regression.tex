@@ -52,3 +52,21 @@
     \end{figure}
 \end{frame}
 
+\begin{frame}{Details zum Training}
+    \textbf{Implementierung in Tensorflow, Training auf Google Colab GPU}
+    \begin{itemize}
+        \item 534 Zus\"atzliche Trainingsbilder hinzugef\"ugt
+        \item Data Augmentation: $949 \Rightarrow 22.776$ Bilder
+              \begin{itemize}
+                  \item Horizontal Flip, Random Cropping, Random Contrast, Random Brightness
+                  \item \textbf{Ben\"otigt >14GB GPU Speicher!}
+              \end{itemize}
+        \item Gradient Descent mit ADAM Optimizer
+        \item Loss: Binary cross entropy
+              \begin{equation*}
+                  -\sum_{\text{Pixel}} y_{true} \log (y_{pred}) + (1 - y_{true}) \log (1 - y_{pred})
+              \end{equation*}
+        \item Zur Validierung 20 Bilder aus EU/RO per Hand selektiert
+        \item \glqq Early Stopping\grqq{} nach 19 Epochen
+    \end{itemize}
+\end{frame}
