@@ -1,11 +1,17 @@
 import tensorflow as tf
 import settings
-from data_reader import get_image_paths_from_directory, make_dataset_from_image_paths
+from data_reader import (
+    get_image_paths_from_directory,
+    make_dataset_from_image_paths,
+    make_dataset_from_image_paths_with_masks,
+)
 from visualization_tools import show_image
 from preprocessing import (
     bounding_box_in_percent,
     bounding_box_in_pixel,
     scale_bounding_box,
+    bounding_box_to_binary_mask,
+    mask_to_bounding_box,
 )
 import numpy as np
 
@@ -37,11 +43,35 @@ def contrast_fun(cur_image, cur_bounding_box):
     return (np.array(img_list), np.array(bounding_box_list))
 
 
-def flip_fun(cur_image, cur_bounding_box):
+def flip_fun(cur_image, cur_bounding_box, mask=False):
     img_list = [cur_image, tf.image.flip_left_right(cur_image)]
-    bounding_box_list = [cur_bounding_box, flip_bounding_box(cur_bounding_box)]
+
+    if not mask:
+        bounding_box_list = [cur_bounding_box, flip_bounding_box(cur_bounding_box)]
+    else:
+        bounding_box_pixel = mask_to_bounding_box(cur_bounding_box.numpy())
+        bounding_box_flipped = flip_bounding_box(
+            bounding_box_in_percent(
+                bounding_box_pixel,
+                img_height=cur_image.shape[0],
+                img_width=cur_image.shape[1],
+            )
+        )
+        bounding_box_flipped = bounding_box_in_pixel(
+            bounding_box_flipped, cur_image.shape[0], cur_image.shape[1]
+        )
+        bounding_box_list = [
+            cur_bounding_box,
+            bounding_box_to_binary_mask(
+                bounding_box_flipped, cur_image.shape[0], cur_image.shape[1]
+            ),
+        ]
 
     return (np.array(img_list), np.array(bounding_box_list))
+
+
+def flip_fun_mask(cur_image, cur_bounding_box):
+    return flip_fun(cur_image, cur_bounding_box, mask=True)
 
 
 def brightness_fun(cur_image, cur_bounding_box):
@@ -61,16 +91,21 @@ def brightness_fun(cur_image, cur_bounding_box):
     return (np.array(img_list), np.array(bounding_box_list))
 
 
-def random_crop_fun(cur_image, cur_bounding_box):
+def random_crop_fun(cur_image, cur_bounding_box, mask=False):
     img_list = []
     bounding_box_list = []
 
-    # bounding box is in percent, but we need pixel values
     img_height = cur_image.shape[0]
     img_width = cur_image.shape[1]
-    x_min, y_min, width, height = bounding_box_in_pixel(
-        cur_bounding_box, img_height, img_width
-    )
+
+    if mask:
+        bounding_box_pixel = mask_to_bounding_box(cur_bounding_box.numpy())
+    else:
+        bounding_box_pixel = bounding_box_in_pixel(
+            cur_bounding_box, img_height, img_width
+        )
+
+    x_min, y_min, width, height = bounding_box_pixel
 
     rng = np.random.default_rng()
     random_offset_height = rng.integers(low=0, high=y_min + 1, size=1)[0]
@@ -111,10 +146,23 @@ def random_crop_fun(cur_image, cur_bounding_box):
         target_img_height=img_height,
         target_img_width=img_width,
     )
-    bounding_box_new = bounding_box_in_percent(bounding_box_new, img_height, img_width)
-    bounding_box_list.append(bounding_box_new)
+
+    if not mask:
+        bounding_box_new = bounding_box_in_percent(
+            bounding_box_new, img_height, img_width
+        )
+        bounding_box_list.append(bounding_box_new)
+    else:
+        bounding_box_mask = bounding_box_to_binary_mask(
+            bounding_box_new, img_height, img_width
+        )
+        bounding_box_list.append(bounding_box_mask)
 
     return (np.array(img_list), np.array(bounding_box_list))
+
+
+def random_crop_fun_mask(cur_image, cur_bounding_box):
+    return random_crop_fun(cur_image, cur_bounding_box, mask=True)
 
 
 def _augment_dataset(dataset, augment_fun):
@@ -141,8 +189,16 @@ def horizontal_flip(dataset: tf.data.Dataset) -> tf.data.Dataset:
     return _augment_dataset(dataset, flip_fun)
 
 
+def horizontal_flip_mask(dataset: tf.data.Dataset) -> tf.data.Dataset:
+    return _augment_dataset(dataset, flip_fun_mask)
+
+
 def random_crop(dataset: tf.data.Dataset) -> tf.data.Dataset:
     return _augment_dataset(dataset, random_crop_fun)
+
+
+def random_crop_mask(dataset: tf.data.Dataset) -> tf.data.Dataset:
+    return _augment_dataset(dataset, random_crop_fun_mask)
 
 
 if __name__ == "__main__":
@@ -161,7 +217,7 @@ if __name__ == "__main__":
     TARGET_IMG_HEIGHT = 500
     TARGET_IMG_WIDTH = 500
 
-    dataset = make_dataset_from_image_paths(
+    dataset = make_dataset_from_image_paths_with_masks(
         image_path_list,
         target_img_height=TARGET_IMG_HEIGHT,
         target_img_width=TARGET_IMG_WIDTH,
@@ -170,10 +226,11 @@ if __name__ == "__main__":
     print(f"Num images original: {len(dataset)}")
 
     dataset_augmented = dataset
-    dataset_augmented = random_crop(dataset_augmented)
-    # dataset_augmented = horizontal_flip(dataset_augmented)
-    # dataset_augmented = add_brightness(dataset_augmented)
-    # dataset_augmented = add_contrast(dataset_augmented)
+    dataset_augmented = horizontal_flip_mask(dataset_augmented)
+    dataset_augmented = add_brightness(dataset_augmented)
+    dataset_augmented = add_contrast(dataset_augmented)
+    dataset_augmented = random_crop_mask(dataset_augmented)
+    dataset_augmented = horizontal_flip_mask(dataset_augmented)
 
     print(f"Num images augmented: {len(list(dataset_augmented.as_numpy_iterator()))}")
 
@@ -181,9 +238,11 @@ if __name__ == "__main__":
         cur_image = cur_example[0]
         cur_bounding_box = cur_example[1]
 
-        cur_bounding_box_pixel = bounding_box_in_pixel(
-            cur_bounding_box, TARGET_IMG_HEIGHT, TARGET_IMG_WIDTH
-        )
+        # cur_bounding_box_pixel = bounding_box_in_pixel(
+        # cur_bounding_box, TARGET_IMG_HEIGHT, TARGET_IMG_WIDTH
+        # )
 
-        print(cur_bounding_box_pixel)
-        show_image(cur_image.astype(int), cur_bounding_box_pixel)
+        # print(cur_bounding_box_pixel)
+        show_image(
+            np.multiply(cur_image, cur_bounding_box[:, :, np.newaxis]).astype(int)
+        )
