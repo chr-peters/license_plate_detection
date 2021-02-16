@@ -39,11 +39,11 @@ def ocr_pipeline(img, bounding_box):
 ###############################################################################
 
 if __name__ == "__main__":
-    # from license_plate_extraction.prediction import predict_bounding_box
-    # from license_plate_extraction import data_reader
-    # from license_plate_extraction import settings
-    # from license_plate_extraction import preprocessing
-    # from license_plate_extraction import visualization_tools
+    from license_plate_extraction.prediction import predict_bounding_box
+    from license_plate_extraction import data_reader
+    from license_plate_extraction import settings
+    from license_plate_extraction import preprocessing
+    from license_plate_extraction import visualization_tools
 
     image_dir_vali_eu = settings.DATA_DIR / "validation_eu"
     image_dir_vali_ro = settings.DATA_DIR / "validation_ro"
