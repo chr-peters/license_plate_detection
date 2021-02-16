@@ -151,7 +151,14 @@ def ocr_extraction(img_bound, x_start, y_start):
 
 
 def ocr(img, bounding_box, method):
-    # check which method is used:
+    if set(bounding_box) <= set((0, 0, 0, 0)):
+        bounding_box = (
+            (0.5 * img.shape[1]) / img.shape[1],
+            (0.5 * img.shape[0]) / img.shape[0],
+            (0.2 * img.shape[1]) / img.shape[1],
+            (0.05 * img.shape[0]) / img.shape[0],
+        )
+
     if method == "normal":
         img_bound, x_start, y_start = extract_plate(img, bounding_box)
         data_plate = ocr_extraction(img_bound, x_start, y_start)
@@ -249,7 +256,7 @@ def ocr_validation(data_plate):
         final_frame = final_frame[final_frame["conf"] >= 40]
         final_frame = final_frame.sort_values(by=["x"])
 
-        for i in range(len(final_frame)):
+        for i in final_frame.index:  # range(len(final_frame)):
             if i not in final_frame.index:
                 continue
             curr_frame = final_frame[
@@ -283,9 +290,9 @@ def ocr_validation(data_plate):
 if __name__ == "__main__":
     from pathlib import Path
 
-    # data_dir = Path(__file__).parent.parent.parent / "data"
-    # img = cv2.imread(str(data_dir / "validation_eu" / "SG47471_car_eu.jpg"))
-    # bounding_box = (257 / 576, 233 / 432, (345 - 257) / 576, (253 - 233) / 432)
+    data_dir = Path(__file__).parent.parent.parent / "data"
+    img = cv2.imread(str(data_dir / "validation_eu" / "LM633BD_car_eu.jpg"))
+    bounding_box = (162.5025 / 461, 151.375 / 346, 137.1475 / 461, 40.655 / 346)
 
     methods = [
         "normal",
