@@ -60,8 +60,6 @@ def mask_to_bounding_box(mask: np.ndarray, threshold_percent=0.1) -> np.ndarray:
         (mask * 255).astype("uint8"), int(255 * threshold_percent), 255, 0
     )
 
-    show_image(thresh)
-
     contours, hierarchy = cv2.findContours(
         thresh, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE
     )
