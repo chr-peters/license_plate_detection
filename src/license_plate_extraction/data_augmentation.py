@@ -91,16 +91,21 @@ def brightness_fun(cur_image, cur_bounding_box):
     return (np.array(img_list), np.array(bounding_box_list))
 
 
-def random_crop_fun(cur_image, cur_bounding_box):
+def random_crop_fun(cur_image, cur_bounding_box, mask=False):
     img_list = []
     bounding_box_list = []
 
-    # bounding box is in percent, but we need pixel values
     img_height = cur_image.shape[0]
     img_width = cur_image.shape[1]
-    x_min, y_min, width, height = bounding_box_in_pixel(
-        cur_bounding_box, img_height, img_width
-    )
+
+    if mask:
+        bounding_box_pixel = mask_to_bounding_box(cur_bounding_box.numpy())
+    else:
+        bounding_box_pixel = bounding_box_in_pixel(
+            cur_bounding_box, img_height, img_width
+        )
+
+    x_min, y_min, width, height = bounding_box_pixel
 
     rng = np.random.default_rng()
     random_offset_height = rng.integers(low=0, high=y_min + 1, size=1)[0]
@@ -141,10 +146,23 @@ def random_crop_fun(cur_image, cur_bounding_box):
         target_img_height=img_height,
         target_img_width=img_width,
     )
-    bounding_box_new = bounding_box_in_percent(bounding_box_new, img_height, img_width)
-    bounding_box_list.append(bounding_box_new)
+
+    if not mask:
+        bounding_box_new = bounding_box_in_percent(
+            bounding_box_new, img_height, img_width
+        )
+        bounding_box_list.append(bounding_box_new)
+    else:
+        bounding_box_mask = bounding_box_to_binary_mask(
+            bounding_box_new, img_height, img_width
+        )
+        bounding_box_list.append(bounding_box_mask)
 
     return (np.array(img_list), np.array(bounding_box_list))
+
+
+def random_crop_fun_mask(cur_image, cur_bounding_box):
+    return random_crop_fun(cur_image, cur_bounding_box, mask=True)
 
 
 def _augment_dataset(dataset, augment_fun):
@@ -179,6 +197,10 @@ def random_crop(dataset: tf.data.Dataset) -> tf.data.Dataset:
     return _augment_dataset(dataset, random_crop_fun)
 
 
+def random_crop_mask(dataset: tf.data.Dataset) -> tf.data.Dataset:
+    return _augment_dataset(dataset, random_crop_fun_mask)
+
+
 if __name__ == "__main__":
     images_directory_br = settings.DATA_DIR / "br_cars+lps"
     images_directory_eu = settings.DATA_DIR / "eu_cars+lps"
@@ -204,10 +226,11 @@ if __name__ == "__main__":
     print(f"Num images original: {len(dataset)}")
 
     dataset_augmented = dataset
-    # dataset_augmented = random_crop(dataset_augmented)
     dataset_augmented = horizontal_flip_mask(dataset_augmented)
     dataset_augmented = add_brightness(dataset_augmented)
-    # dataset_augmented = add_contrast(dataset_augmented)
+    dataset_augmented = add_contrast(dataset_augmented)
+    dataset_augmented = random_crop_mask(dataset_augmented)
+    dataset_augmented = horizontal_flip_mask(dataset_augmented)
 
     print(f"Num images augmented: {len(list(dataset_augmented.as_numpy_iterator()))}")
 
