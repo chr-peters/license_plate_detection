@@ -278,10 +278,6 @@ def ocr_validation(data_plate):
         return ""
 
 
-# x +- 1 gibts da doppelungen? falls ja, schmeiße die zeile raus, die kleiner conf hat
-
-cond = ()
-final_frame[final_frame[cond]]
 ###############################################################################
 
 if __name__ == "__main__":
