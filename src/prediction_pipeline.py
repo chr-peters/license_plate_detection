@@ -1,4 +1,7 @@
-from license_plate_extraction.prediction import predict_bounding_box
+from license_plate_extraction.prediction import (
+    predict_bounding_box,
+    predict_bounding_box_using_mask,
+)
 from license_plate_extraction import data_reader
 from license_plate_extraction import settings
 from license_plate_extraction import preprocessing
@@ -15,7 +18,8 @@ def make_prediction(image_path: Path) -> str:
     image_height = image_tensor.shape[0]
     image_width = image_tensor.shape[1]
 
-    predicted_bounding_box = predict_bounding_box(image_tensor)
+    # predicted_bounding_box = predict_bounding_box(image_tensor)
+    predicted_bounding_box = predict_bounding_box_using_mask(image_tensor)
 
     image_numpy = image_tensor.numpy()
     ocr_prediction = ocr_pipeline(image_numpy, predicted_bounding_box)
@@ -33,7 +37,7 @@ if __name__ == "__main__":
     # img_dir_russia = settings.DATA_DIR / "cars_russia"
 
     # image_paths = data_reader.get_image_paths_from_directory(
-    #     image_dir_eu, contains="_car_"
+    # image_dir_eu, contains="_car_"
     # )
     image_paths = data_reader.get_image_paths_from_directory(image_dir_no_labels)
     # image_paths = data_reader.get_image_paths_from_directory(img_dir_russia)
