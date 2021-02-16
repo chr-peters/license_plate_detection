@@ -59,9 +59,7 @@ if __name__ == "__main__":
     )
     show_image(thresh)
 
-    predicted_bounding_box = preprocessing.mask_to_bounding_box(
-        cur_prediction, show_image=True
-    )
+    predicted_bounding_box = preprocessing.mask_to_bounding_box(cur_prediction)
 
     # show the rectangle that was found as well as the original image with bounding box
     show_image(thresh, predicted_bounding_box)
