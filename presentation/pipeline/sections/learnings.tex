@@ -3,13 +3,18 @@
 \begin{frame}{Learnings}
     \textbf{Erfolgreiches Programmieren im Projekt erfordert Rahmenbedingungen}
     \begin{itemize}
-        \item[$\rightarrow$] Beispielsweise requirements festlegen (welche Pakete werden ben\"otigt, was muss installiert sein)
-        \item[$\rightarrow$] Versionskontrolle (in unserem Fall Git)
+        \item[$\rightarrow$] Requirements festlegen (welche Pakete werden ben\"otigt, was muss installiert sein) $\rightarrow$ \texttt{requirements.txt}
+        \item[$\rightarrow$] Versionskontrolle (in unserem Fall Git)\footnote{Besucht uns auf \url{https://github.com/cxan96/license_plate_detection}}
     \end{itemize}
 
-    \textbf{Ausblick:}
+    \textbf{Verbesserungen:}
     \begin{itemize}
-        \item Robustheit gegenüber schrägen Nummernschildern ausweiten
+        \item Die OCR-Pipeline ist manchmal noch recht fehleranf\"allig
+              \begin{itemize}
+                  \item[$\Rightarrow$] Schwellenwertverfahren verbessern
+                  \item[$\Rightarrow$] Vielleicht Image Segmentation auch f\"ur OCR?
+              \end{itemize}
+        \item Geschwindigkeit kann noch verbessert werden
     \end{itemize}
 \end{frame}
 
