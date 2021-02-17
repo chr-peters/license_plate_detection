@@ -245,7 +245,7 @@ def ocr(img, bounding_box, method):
 def ocr_validation(data_plate):
     if data_plate.empty:
         return ""
-    data_plate = data_plate[data_plate["conf"] >= 75]
+    data_plate = data_plate[data_plate["conf"] >= 50]
     data_plate = data_plate.reset_index(drop=True)
 
     final_frame = pd.DataFrame()
@@ -255,7 +255,7 @@ def ocr_validation(data_plate):
             continue
 
         curr_frame = data_plate[
-            (data_plate["x"] <= data_plate.x[i] + 1)
+            (data_plate["x"] <= data_plate.x[i] + data_plate.w[i])
             & (data_plate["x"] >= data_plate.x[i] - 1)
             & (data_plate["y"] <= data_plate.y[i] + 1)
             & (data_plate["y"] >= data_plate.y[i] - 1)
