@@ -44,11 +44,13 @@ if __name__ == "__main__":
     # image_paths = data_reader.get_image_paths_from_directory(
     #     image_dir_eu_valid, contains="_car_"
     # )
-    image_paths = data_reader.get_image_paths_from_directory(
-        image_dir_ro_valid, contains="_car_"
-    )
+    # image_paths = data_reader.get_image_paths_from_directory(
+    #     image_dir_ro_valid, contains="_car_"
+    # )
 
-    # image_paths = data_reader.get_image_paths_from_directory(image_dir_no_labels)
+    image_paths = data_reader.get_image_paths_from_directory(image_dir_no_labels)
+    # image_paths = [Path(settings.DATA_DIR / "no_labels" / "b-16-9-P17_0250_fine.jpg")]
+    # image_paths = [Path(settings.DATA_DIR / "no_labels" / "audi.jpg")]
     # image_paths = data_reader.get_image_paths_from_directory(img_dir_russia)
 
     # test_path = image_dir_eu / "BS47040_car_eu.jpg"
