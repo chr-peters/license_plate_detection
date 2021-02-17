@@ -41,8 +41,8 @@ def ocr_pipeline(img, bounding_box):
 if __name__ == "__main__":
     data_dir = Path(__file__).parent.parent.parent / "data"
     char = ocr_pipeline(
-        cv2.imread(str(data_dir / "validation_eu" / "RK340AO_car_eu.jpg")),
-        predicted_bounding_box,
+        cv2.imread(str(data_dir / "validation_eu" / "LM025BD_car_eu.jpg")),
+        (140.9375 / 451, 224.77 / 364, 115.005 / 451, 38.22 / 364),
     )
     print(char)
 

@@ -90,45 +90,53 @@ def extract_plate_side(img, bounding_box, change_x, change_y, coords):
 
 
 def ocr_extraction(img_bound, x_start, y_start):
-    gray = cv2.cvtColor(img_bound, cv2.COLOR_BGR2GRAY)
-    gray = cv2.resize(gray, None, fx=3, fy=3, interpolation=cv2.INTER_CUBIC)
-    blur_g = cv2.GaussianBlur(gray, (5, 5), 0)
-    blur = cv2.medianBlur(blur_g, 3)
-    ret, thresh = cv2.threshold(blur, 0, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)
-    rect_kern = cv2.getStructuringElement(cv2.MORPH_RECT, (3, 3))
-    dilation = cv2.dilate(thresh, rect_kern, iterations=1)
-
-    contours, hierarchy = cv2.findContours(
-        dilation, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE
-    )
-    sorted_contours = sorted(contours, key=lambda ctr: cv2.boundingRect(ctr)[0])
+    method = ["otsu", "60", "80", "100", "120"]
 
     data_plate = pd.DataFrame()
 
-    for cnt in sorted_contours:
-        x, y, w, h = cv2.boundingRect(cnt)
-        height, width = gray.shape
-        if height / float(h) > 3:
-            continue
-        ratio = h / float(w)
-        if ratio < 1.2:
-            continue
-        if width / float(w) > 50:
-            continue
-        roi = thresh[np.max([y - 5, 0]) : y + h + 5, np.max([x - 5, 0]) : x + w + 5]
-        roi = cv2.bitwise_not(roi)
-        roi = cv2.medianBlur(roi, 5)
-        dat = pytesseract.image_to_data(
-            roi,
-            config="-c tessedit_char_whitelist=0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ --psm 10 --oem 3",
-            output_type="data.frame",
+    for m in method:
+        gray = cv2.cvtColor(img_bound, cv2.COLOR_BGR2GRAY)
+        gray = cv2.resize(gray, None, fx=3, fy=3, interpolation=cv2.INTER_CUBIC)
+        blur_g = cv2.GaussianBlur(gray, (5, 5), 0)
+        blur = cv2.medianBlur(blur_g, 3)
+        if m == "otsu":
+            ret, thresh = cv2.threshold(
+                blur, 0, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU
+            )
+        else:
+            ret, thresh = cv2.threshold(blur, int(m), 255, cv2.THRESH_BINARY_INV)
+        rect_kern = cv2.getStructuringElement(cv2.MORPH_RECT, (3, 3))
+        dilation = cv2.dilate(thresh, rect_kern, iterations=1)
+
+        contours, hierarchy = cv2.findContours(
+            dilation, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE
         )
-        dat = dat[dat.conf == np.max(dat.conf)]
-        dat["x"] = (x / 3) + x_start
-        dat["y"] = (y / 3) + y_start
-        dat["w"] = w
-        dat["h"] = h
-        data_plate = pd.concat([data_plate, dat])
+        sorted_contours = sorted(contours, key=lambda ctr: cv2.boundingRect(ctr)[0])
+
+        for cnt in sorted_contours:
+            x, y, w, h = cv2.boundingRect(cnt)
+            height, width = gray.shape
+            if height / float(h) > 3:
+                continue
+            ratio = h / float(w)
+            if ratio < 1.2:
+                continue
+            if width / float(w) > 50:
+                continue
+            roi = thresh[np.max([y - 5, 0]) : y + h + 5, np.max([x - 5, 0]) : x + w + 5]
+            roi = cv2.bitwise_not(roi)
+            roi = cv2.medianBlur(roi, 5)
+            dat = pytesseract.image_to_data(
+                roi,
+                config="-c tessedit_char_whitelist=0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ --psm 10 --oem 3",
+                output_type="data.frame",
+            )
+            dat = dat[dat.conf == np.max(dat.conf)]
+            dat["x"] = (x / 3) + x_start
+            dat["y"] = (y / 3) + y_start
+            dat["w"] = w
+            dat["h"] = h
+            data_plate = pd.concat([data_plate, dat])
 
     data_plate = data_plate.dropna()
     if not data_plate.empty:
@@ -291,8 +299,11 @@ if __name__ == "__main__":
     from pathlib import Path
 
     data_dir = Path(__file__).parent.parent.parent / "data"
-    img = cv2.imread(str(data_dir / "validation_eu" / "LM633BD_car_eu.jpg"))
-    bounding_box = (162.5025 / 461, 151.375 / 346, 137.1475 / 461, 40.655 / 346)
+    # img = cv2.imread(str(data_dir / "validation_eu" / "LM633BD_car_eu.jpg"))
+    # bounding_box = (162.5025 / 461, 151.375 / 346, 137.1475 / 461, 40.655 / 346)
+
+    img = cv2.imread(str(data_dir / "validation_eu" / "LM025BD_car_eu.jpg"))
+    bounding_box = (140.9375 / 451, 224.77 / 364, 115.005 / 451, 38.22 / 364)
 
     methods = [
         "normal",
