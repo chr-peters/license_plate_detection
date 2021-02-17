@@ -53,7 +53,7 @@ def predict_bounding_box_using_mask(image_tensor: tf.Tensor) -> np.ndarray:
 
     predicted_mask = prediction_model_mask(image_tensor)[0].numpy()
 
-    visualization_tools.show_image(predicted_mask)
+    # visualization_tools.show_image(predicted_mask)
 
     bounding_box = preprocessing.mask_to_bounding_box(predicted_mask)
 

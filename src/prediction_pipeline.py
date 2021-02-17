@@ -41,12 +41,12 @@ if __name__ == "__main__":
     # image_paths = data_reader.get_image_paths_from_directory(
     # image_dir_eu, contains="_car_"
     # )
-    image_paths = data_reader.get_image_paths_from_directory(
-        image_dir_eu_valid, contains="_car_"
-    )
     # image_paths = data_reader.get_image_paths_from_directory(
-    #     image_dir_ro_valid, contains="_car_"
+    #     image_dir_eu_valid, contains="_car_"
     # )
+    image_paths = data_reader.get_image_paths_from_directory(
+        image_dir_ro_valid, contains="_car_"
+    )
 
     # image_paths = data_reader.get_image_paths_from_directory(image_dir_no_labels)
     # image_paths = data_reader.get_image_paths_from_directory(img_dir_russia)
@@ -57,6 +57,7 @@ if __name__ == "__main__":
     for cur_path in image_paths:
         cur_bounding_box, cur_prediction = make_prediction(cur_path)
         print(cur_prediction)
+        print(cur_bounding_box)
 
         cur_image_tensor = data_reader.read_image_as_tensor(cur_path)
         visualization_tools.show_image(
