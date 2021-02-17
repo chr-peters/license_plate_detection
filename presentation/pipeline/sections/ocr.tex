@@ -48,7 +48,6 @@
         \item {\scriptsize Jeder Character wird einzeln ausgelesen \rightarrow  \, Page Segmentation Mode (\texttt{--psm10})}
         \item {\scriptsize Engine Mode \texttt{--oem3}}
         \item {\scriptsize Zeichen-Whitelist (Großbuchstaben + Zahlen 0-9)}
-        \item {\scriptsize Außerdem: Bild darf nicht zu nahe am Character ausgeschnitten werden}
 
               \begin{center}
                   \includegraphics[width=0.75\textwidth]{img/char_preprocessing.jpg}
@@ -59,7 +58,7 @@
 
 
 \begin{frame}{Boundingboxes verschieben}
-    Falls keine Character in der gefundenen Bounding-Box erkannt werden, verschiebe die Bounding-Box anhand unterschiedlicher Methoden: {\textit{hoch, runter, rechts, links, oben-rechts, unten-rechts, unten-links, oben-links}}
+Verschiebung der Bounding-Box in acht Richtungen $\rightarrow$ Character, die nicht in ursprünglicher Bounding-Box enthalten sind, werden noch ausgelesen
     \begin{center}
         \includegraphics[width=\textwidth]{img/bbox_shift}
     \end{center}
