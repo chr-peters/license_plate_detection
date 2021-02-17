@@ -20,7 +20,7 @@
     \begin{figure}
         \centering
         \includegraphics[width=\textwidth]{img/nn.pdf}
-        \caption{Das Ergebnis nach wochenlangem Ausprobieren.}
+        \caption{Das Ergebnis nach wochenlangem Ausprobieren. Insgesamt 191.297 trainierbare Parameter.}
     \end{figure}
 \end{frame}
 
@@ -61,10 +61,10 @@
                   \item Horizontal Flip, Random Cropping, Random Contrast, Random Brightness
                   \item \textbf{Ben\"otigt $>$14GB GPU Speicher!}
               \end{itemize}
-        \item Gradient Descent mit ADAM Optimizer
+        \item Mini Batch Stochastic Gradient Descent mit ADAM Optimizer
         \item Loss: Binary cross entropy
               \begin{equation*}
-                  -\sum_{\text{Pixel}} y_{true} \log (y_{pred}) + (1 - y_{true}) \log (1 - y_{pred})
+                  -\sum_{i \in \text{Pixel}} y_{true}^{(i)} \log (y_{pred}^{(i)}) + (1 - y_{true}^{(i)}) \log (1 - y_{pred}^{(i)})
               \end{equation*}
         \item Zur Validierung 20 Bilder aus EU/RO per Hand selektiert
         \item \glqq Early Stopping\grqq{} nach 19 Epochen

@@ -131,14 +131,17 @@ def ocr_extraction(img_bound, x_start, y_start):
                 config="-c tessedit_char_whitelist=0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ --psm 10 --oem 3",
                 output_type="data.frame",
             )
-            dat = dat[dat.conf == np.max(dat.conf)]
+            dat = dat[dat["text"].notna()]
+            # if pd.api.types.is_numeric_dtype(dat["text"]):
+            #     dat = dat[~np.isnan(dat["text"])]
+            if dat.empty:
+                continue
             dat["x"] = (x / 3) + x_start
             dat["y"] = (y / 3) + y_start
-            dat["w"] = w
-            dat["h"] = h
+            dat["w"] = w / 3
+            dat["h"] = h / 3
             data_plate = pd.concat([data_plate, dat])
 
-    data_plate = data_plate.dropna()
     if not data_plate.empty:
         data_plate = data_plate.drop(
             columns=[
@@ -155,6 +158,7 @@ def ocr_extraction(img_bound, x_start, y_start):
             ]
         )
 
+    data_plate = data_plate.dropna()
     return data_plate
 
 
@@ -239,7 +243,10 @@ def ocr(img, bounding_box, method):
 
 
 def ocr_validation(data_plate):
-    data_plate = data_plate.reset_index()
+    if data_plate.empty:
+        return ""
+    data_plate = data_plate[data_plate["conf"] >= 50]
+    data_plate = data_plate.reset_index(drop=True)
 
     final_frame = pd.DataFrame()
 
@@ -248,7 +255,7 @@ def ocr_validation(data_plate):
             continue
 
         curr_frame = data_plate[
-            (data_plate["x"] <= data_plate.x[i] + 1)
+            (data_plate["x"] <= data_plate.x[i] + data_plate.w[i])
             & (data_plate["x"] >= data_plate.x[i] - 1)
             & (data_plate["y"] <= data_plate.y[i] + 1)
             & (data_plate["y"] >= data_plate.y[i] - 1)
@@ -261,7 +268,6 @@ def ocr_validation(data_plate):
         final_frame = pd.concat([final_frame, best_conf])
 
     if not final_frame.empty:
-        final_frame = final_frame[final_frame["conf"] >= 40]
         final_frame = final_frame.sort_values(by=["x"])
 
         for i in final_frame.index:  # range(len(final_frame)):
