@@ -297,38 +297,3 @@ def ocr_validation(data_plate):
         return plate
     else:
         return ""
-
-
-###############################################################################
-
-if __name__ == "__main__":
-    from pathlib import Path
-
-    data_dir = Path(__file__).parent.parent.parent / "data"
-    # img = cv2.imread(str(data_dir / "validation_eu" / "LM633BD_car_eu.jpg"))
-    # bounding_box = (162.5025 / 461, 151.375 / 346, 137.1475 / 461, 40.655 / 346)
-
-    img = cv2.imread(str(data_dir / "validation_eu" / "LM025BD_car_eu.jpg"))
-    bounding_box = (140.9375 / 451, 224.77 / 364, 115.005 / 451, 38.22 / 364)
-
-    methods = [
-        "normal",
-        "up",
-        "down",
-        "left",
-        "right",
-        "topright",
-        "bottomright",
-        "bottomleft",
-        "topleft",
-    ]
-
-    confi_frame = pd.DataFrame()
-
-    for m in methods:
-        data_plate = ocr(img, bounding_box, m)
-        confi_frame = pd.concat([confi_frame, data_plate])
-
-    char = ocr_validation(confi_frame)
-
-    print(char)
